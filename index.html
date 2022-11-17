@@ -6,37 +6,49 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tarefas</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <style>
+      body {
+        background-color: rgb(15, 15, 15);
+      }
+      .tasks {
+        background-color: rgb(30, 30, 30);
+        color: white;
+      }
+      .task {
+        padding: 30px;
+      }
+    </style>
 </head>
 <body>
     <header>
         <div>
             <p>
-                <input type="text" name="" id="createNewTask"> 
-                <input type="button" value="add"> <!-- icon: + -->
+                <input type="text" name="" id="createNewTask" style="height: 35px;"> 
+                <button type="button" class="btn btn-dark">+</button> <!-- icon: + -->
             </p>
         </div>
         <hr>
     </header>
     <section>
-        <div>
-            <p>
+        <div class="tasks">
+            <div class="task">
                 task 1
                 <input type="button" value="edit" id="editBtn"> <!-- icon: lapis -->
                 <input type="button" value="delete" id="deleteBtn"> <!-- icon: lixeiro-->
                 <input type="button" value="finish" id="finishBtn"> <!-- icon: V -->
-            </p>
-            <p>
+            </div>
+            <div class="task">
                 task 2
                 <input type="button" value="edit" id="editBtn">
                 <input type="button" value="delete" id="deleteBtn">
                 <input type="button" value="finish" id="finishBtn">
-            </p>
-            <p>
+            </div>
+            <div class="task">
                 task 3
                 <input type="button" value="edit" id="editBtn">
                 <input type="button" value="delete" id="deleteBtn">
                 <input type="button" value="finish" id="finishBtn">
-            </p>
+            </div>
         </div>
     </section>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
