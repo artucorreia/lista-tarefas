@@ -63,7 +63,7 @@ createNewTask.addEventListener('click', () => {
         })
     } else {
         alert('Adicione uma tarefa')
-    }
+    };
     cleanInput(newTaskTxt);
 });
 
