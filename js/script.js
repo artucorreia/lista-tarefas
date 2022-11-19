@@ -62,7 +62,7 @@ createNewTask.addEventListener('click', () => {
             divTasks.appendChild(createAndOrganizeElements(task));
         })
     } else {
-        alert('Adicione uma tarefa')
+        alert('Adicione uma tarefa');
     };
     cleanInput(newTaskTxt);
 });
