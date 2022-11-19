@@ -7,7 +7,7 @@ const optionId = {
 
 const options = event => optionId[event.target.id]();
 
-const main = buttons => buttons.addEventListener('click', options);
+const buttons = btns => btns.addEventListener('click', options);
 
 const clearInput = txt => txt.value = '';
 
@@ -55,7 +55,7 @@ const createAndOrganizeElements = task => {
     btnEdit.appendChild(iconEdit); 
     divGroupBtns.appendChild(btnDelete);
     btnDelete.appendChild(iconDelete);
-    main(divGroupBtns);
+    buttons(divGroupBtns);
     return divRow;
 };
 
