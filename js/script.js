@@ -1,8 +1,18 @@
-const check = () => console.log('check ok')
+let aux = 0;
+const gambiarra = () => {
+    console.log(aux.toString());
+    aux++;
+}
 
-const edit = () => console.log('edit ok')
+const selectTask = () => {
+    console.log('ok');
+}
 
-const exclude = () => console.log('delete ok') 
+const check = () => selectTask();
+
+const edit = () => selectTask();
+
+const exclude = () => selectTask();
 
 // check, edit, delete
 const optionId = {
@@ -49,6 +59,7 @@ const createAndOrganizeElements = task => {
     const iconDelete = window.document.createElement('i');
     iconDelete.className = 'fas fa-trash';
     iconDelete.id = 'delete';
+    gambiarra();
     // organizando
     divRow.appendChild(divColTask);
     divColTask.appendChild(divTask);
