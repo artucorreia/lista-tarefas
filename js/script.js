@@ -68,7 +68,7 @@ createNewTask.addEventListener('click', () => {
 });
 
 // adicionando o enter
-const teste = window.document.getElementById('newTask');
+const keyEnter = window.document.getElementById('newTask');
 newTask.addEventListener('keypress', (event) => {
     if (event.key === 'Enter') {
         document.getElementById('createNewTask').click();
