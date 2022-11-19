@@ -1,5 +1,7 @@
+const cleanInput = (txt) => txt.value = '';
+
 const createAndOrganizeElements = (task) => {
-    console.log(task)
+    // criando 
     const divRow = window.document.createElement('div'); 
     divRow.className = 'row';
     const divColTask = window.document.createElement('div'); 
@@ -24,6 +26,7 @@ const createAndOrganizeElements = (task) => {
     iconEdit.className = 'fas fa-pencil';
     const iconDelete = window.document.createElement('i');
     iconDelete.className = 'fas fa-trash';
+    // organizando
     divRow.appendChild(divColTask);
     divColTask.appendChild(divTask);
     divTask.innerHTML = `${task.name}`;
@@ -40,20 +43,34 @@ const createAndOrganizeElements = (task) => {
 
 // nova tarefa
 var tasks = [];
-const createTask = (t) => {
+const createTask = (name) => {
     return {
-        'name': t,
+        'name': name,
         'status': false
     };
 };
+
 const divTasks = window.document.getElementById('tasks');
 const createNewTask = window.document.getElementById('createNewTask');
 createNewTask.addEventListener('click', () => {
-    let newTasktxt = window.document.getElementById('newTask');
-    let newTaskName = newTasktxt.value;
-    const task = createTask(newTaskName); 
-    tasks.push(task);
-    tasks.forEach((task) => {
-        divTasks.appendChild(createAndOrganizeElements(task));
-    })
+    let newTaskTxt = window.document.getElementById('newTask');
+    let newTaskName = newTaskTxt.value;
+    if (newTaskName != '') {
+        const task = createTask(newTaskName); 
+        tasks.push(task);
+        tasks.forEach((task) => {
+            divTasks.appendChild(createAndOrganizeElements(task));
+        })
+    } else {
+        alert('Adicione uma tarefa')
+    }
+    cleanInput(newTaskTxt);
+});
+
+// adicionando o enter
+const teste = window.document.getElementById('newTask');
+newTask.addEventListener('keypress', (event) => {
+    if (event.key === 'Enter') {
+        document.getElementById('createNewTask').click();
+    };
 });

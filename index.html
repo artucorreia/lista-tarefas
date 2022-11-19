@@ -1,24 +1,20 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
   <title>To-do list</title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-    integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
-    integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <!-- <link rel="stylesheet" href="style/style.css"> -->
 </head>
 
 <body>
   <header>
     <nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark">
-      <img src="img/checklist50px.webp" alt="Icone Página">
+      <img src="img/checklist.webp" alt="Icone Página">
       <a class="navbar-brand" href="#">To-do list</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
         aria-controls="navbarNav" aria-expanded="false" aria-label="Alterna navegação">
@@ -43,64 +39,16 @@
   <section>
     <div class="cab">
       <input type="text" id="newTask">
-      <button type="button" class="btn btn-dark" id="createNewTask">
+      <button type="button" class="btn btn-dark" id="createNewTask" on>
         <i class="fas fa-check"></i>
       </button> <!-- icon: + -->
+      <hr>
     </div>
-    <hr>
-    <div id='tasks'>
-      <div class="task">
-        Arrumar o cabelo
-        <div class="btn-group mr-2" role="group" aria-label="Segundo grupo">
-          <button type="button" class="btn btn-secondary">
-            <i class="fas fa-check"></i>
-          </button>
-          <button type="button" class="btn btn-secondary">
-            <i class="fas fa-pencil"></i>
-          </button>
-          <button type="button" class="btn btn-secondary">
-            <i class="fas fa-trash"></i>
-          </button>
-        </div>
-      </div>
-      <div class="task">
-        Limpar a casa
-        <div class="btn-group mr-2" role="group" aria-label="Segundo grupo">
-          <button type="button" class="btn btn-secondary">
-            <i class="fas fa-check"></i>
-          </button>
-          <button type="button" class="btn btn-secondary">
-            <i class="fas fa-pencil"></i>
-          </button>
-          <button type="button" class="btn btn-secondary">
-            <i class="fas fa-trash"></i>
-          </button>
-        </div>
-      </div>
-      <div class="container">
-        <div class="row">
-          <div class="col">
-            <div class="task">
-              Estudar informática
-            </div>
-          </div>
-          <div class="col">
-            <div class="btn-group mr-2" role="group" aria-label="Segundo grupo">
-              <button type="button" class="btn btn-secondary">
-                <i class="fas fa-check"></i>
-              </button>
-              <button type="button" class="btn btn-secondary">
-                <i class="fas fa-pencil"></i>
-              </button>
-              <button type="button" class="btn btn-secondary">
-                <i class="fas fa-trash"></i>
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
+    <div id="tasks">
+
     </div>
   </section>
+
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
     integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
     crossorigin="anonymous"></script>
@@ -112,5 +60,4 @@
     crossorigin="anonymous"></script>
   <script src="js/script.js"></script>
 </body>
-
 </html>
