@@ -58,9 +58,9 @@ createNewTask.addEventListener('click', () => {
     if (newTaskName != '') {
         const task = createTask(newTaskName); 
         tasks.push(task);
-        tasks.forEach((task) => {
-            divTasks.appendChild(createAndOrganizeElements(task));
-        })
+        // tasks.forEach((task) => {
+        // });
+        divTasks.appendChild(createAndOrganizeElements(task));
     } else {
         alert('Adicione uma tarefa');
     };
