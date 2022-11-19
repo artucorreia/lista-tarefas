@@ -1,8 +1,14 @@
+const check = () => console.log('check ok')
+
+const edit = () => console.log('edit ok')
+
+const exclude = () => console.log('delete ok') 
+
 // check, edit, delete
 const optionId = {
-    'check': () => console.log('check ok'),
-    'edit': () => console.log('edit ok'),
-    'delete': () => console.log('exclude ok')
+    'check': () => check(),
+    'edit': () => edit(),
+    'delete': () => exclude()
 };
 
 const options = event => optionId[event.target.id]();
@@ -76,6 +82,7 @@ createNewTask.addEventListener('click', () => {
     if (newTaskName != '') {
         const task = createTask(newTaskName); 
         tasks.push(task);
+        console.log(tasks)
         divTasks.appendChild(createAndOrganizeElements(task));
 
     } else {
