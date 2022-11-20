@@ -1,7 +1,8 @@
 let aux = 0;
 const gambiarra = () => {
-    console.log(aux.toString());
+    let i = 'id';
     aux++;
+    return i + aux;
 }
 
 const selectTask = () => {
@@ -27,8 +28,11 @@ const buttons = btns => btns.addEventListener('click', options);
 
 const clearInput = txt => txt.value = '';
 
+let id = '';
 const createAndOrganizeElements = task => {
     // criando 
+    id = gambiarra();
+    console.log(id);
     const divRow = window.document.createElement('div'); 
     divRow.className = 'row';
     const divColTask = window.document.createElement('div'); 
@@ -59,7 +63,6 @@ const createAndOrganizeElements = task => {
     const iconDelete = window.document.createElement('i');
     iconDelete.className = 'fas fa-trash';
     iconDelete.id = 'delete';
-    gambiarra();
     // organizando
     divRow.appendChild(divColTask);
     divColTask.appendChild(divTask);
