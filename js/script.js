@@ -1,13 +1,19 @@
+const removeRow = () => {
+    sectionTasks.removeChild(selectedRow);
+}
+
+// selectedTask.innerHTML
 const check = () => {
-    console.log(selectedTask);
+    console.log( selectedTask.innerHTML + ' foi concluída');
 };
 
 const edit = () => {
-    console.log(selectedTask);
+    console.log('vai editar: ' + selectedTask.innerHTML);
 };
 
 const exclude = () => {
-    console.log(selectedTask);
+    removeRow();
+    console.log(selectedTask.innerHTML + ' foi deletado')
 };
 
 // direciona para check, edit, exclude
@@ -20,6 +26,12 @@ const optionClass = {
     'btn btn-secondary delete': () => exclude()
 };
 
+// pega a row da task
+const selectRow = taskId => {
+    let row = window.document.getElementById('row' + taskId);
+    return row;
+};
+
 // pega a task que vai ser verificada, editada ou deletada
 const selectTask = taskId => {
     let task = window.document.getElementById('task' + taskId);
@@ -29,9 +41,11 @@ const selectTask = taskId => {
 // pega tanto a função que o usuário quer executar 
 let taskId = '';
 let selectedTask = '';
+let selectedRow = '';
 const options = event => {
     taskId = event.target.id;
     selectedTask = selectTask(taskId);
+    selectedRow = selectRow(taskId)
     optionClass[event.target.className]();
 };
 
@@ -53,6 +67,7 @@ const createAndOrganizeElements = task => {
     // criando 
     const divRow = window.document.createElement('div'); 
     divRow.className = 'row';
+    divRow.id = 'row' + id;
     const divColTask = window.document.createElement('div'); 
     divColTask.className = 'col';
     const divColBtns = window.document.createElement('div'); 
@@ -107,7 +122,7 @@ const createTask = name => {
     }
 };
 
-const divTasks = window.document.getElementById('tasks');
+const sectionTasks = window.document.getElementById('tasks');
 const createNewTask = window.document.getElementById('createNewTask');
 createNewTask.addEventListener('click', () => {
     let newTaskTxt = window.document.getElementById('newTask');
@@ -115,7 +130,7 @@ createNewTask.addEventListener('click', () => {
     if (newTaskName != '') {
         const task = createTask(newTaskName); 
         tasks.push(task);
-        divTasks.appendChild(createAndOrganizeElements(task));
+        sectionTasks.appendChild(createAndOrganizeElements(task));
     } else {
         alert('Adicione uma tarefa');
     }
