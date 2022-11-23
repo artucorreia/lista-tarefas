@@ -1,13 +1,13 @@
 const check = () => {
-    console.log(taskSelected);
+    console.log(selectedTask);
 };
 
 const edit = () => {
-    console.log(taskSelected);
+    console.log(selectedTask);
 };
 
 const exclude = () => {
-    console.log(taskSelected);
+    console.log(selectedTask);
 };
 
 // direciona para check, edit, exclude
@@ -28,10 +28,10 @@ const selectTask = taskId => {
 
 // pega tanto a função que o usuário quer executar 
 let taskId = '';
-let taskSelected = '';
+let selectedTask = '';
 const options = event => {
     taskId = event.target.id;
-    taskSelected = selectTask(taskId);
+    selectedTask = selectTask(taskId);
     optionClass[event.target.className]();
 };
 
