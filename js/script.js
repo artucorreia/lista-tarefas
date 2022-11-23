@@ -1,14 +1,14 @@
 const check = () => {
-    console.log('check ok')
-}
+    console.log(taskSelected);
+};
 
 const edit = () => {
-    console.log('edit ok')
-}
+    console.log(taskSelected);
+};
 
 const exclude = () => {
-    console.log('exclude ok')
-}
+    console.log(taskSelected);
+};
 
 // direciona para check, edit, exclude
 const optionClass = {
@@ -23,15 +23,16 @@ const optionClass = {
 // pega a task que vai ser verificada, editada ou deletada
 const selectTask = taskId => {
     let task = window.document.getElementById('task' + taskId);
-    console.log(task)
-}
+    return task;
+};
 
 // pega tanto a função que o usuário quer executar 
-let taskId = null;
+let taskId = '';
+let taskSelected = '';
 const options = event => {
-    taskId = event.target;
-    selectTask(taskId);
-    optionClass[event.target.className]()
+    taskId = event.target.id;
+    taskSelected = selectTask(taskId);
+    optionClass[event.target.className]();
 };
 
 const buttons = btns => btns.addEventListener('click', options);
@@ -44,7 +45,7 @@ const createId = () => {
     const i = 'id';
     aux++;
     return i + aux;
-}
+};
 
 let id = '';
 const createAndOrganizeElements = task => {
@@ -103,7 +104,7 @@ const createTask = name => {
     return {
         'name': name,
         'status': false
-    };
+    }
 };
 
 const divTasks = window.document.getElementById('tasks');
@@ -117,7 +118,7 @@ createNewTask.addEventListener('click', () => {
         divTasks.appendChild(createAndOrganizeElements(task));
     } else {
         alert('Adicione uma tarefa');
-    };
+    }
     clearInput(newTaskTxt);
 });
 
@@ -126,5 +127,5 @@ const keyEnter = window.document.getElementById('newTask');
 newTask.addEventListener('keypress', event => {
     if (event.key === 'Enter') {
         document.getElementById('createNewTask').click();
-    };
+    }
 });
