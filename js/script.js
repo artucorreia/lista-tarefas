@@ -1,20 +1,29 @@
+const selectTask = () => { 
+    for (let i = 0; i < tasks.length ; i++) {
+        if(tasks[i].name == selectedDivTask.innerHTML) {
+            return tasks[i];
+        }
+    }
+};
+
 const removeRow = () => {
     sectionTasks.removeChild(selectedRow);
-}
+};
 
-// selectedTask.innerHTML
 const check = () => {
-    console.log( selectedTask.innerHTML + ' foi concluída');
     removeRow();
+    selectTask().status = true;
+    // console.log(selectTask());
 };
 
 const edit = () => {
-    console.log('vai editar: ' + selectedTask.innerHTML);
+    console.log('vai editar: ' + selectedDivTask.innerHTML);
 };
 
 const exclude = () => {
     removeRow();
-    console.log(selectedTask.innerHTML + ' foi deletado')
+    selectTask().status = null;
+    // console.log(selectTask());
 };
 
 // direciona para check, edit, exclude
@@ -46,7 +55,7 @@ let selectedRow = '';
 const options = event => {
     taskId = event.target.id;
     selectedDivTask = selectDivTask(taskId);
-    selectedRow = selectRow(taskId)
+    selectedRow = selectRow(taskId);
     optionClass[event.target.className]();
 };
 
@@ -115,7 +124,7 @@ const createAndOrganizeElements = task => {
 };
 
 // nova tarefa
-var tasks = [];
+let tasks = [];
 const createTask = name => {
     return {
         'name': name,
