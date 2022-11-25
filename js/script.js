@@ -5,6 +5,7 @@ const removeRow = () => {
 // selectedTask.innerHTML
 const check = () => {
     console.log( selectedTask.innerHTML + ' foi concluída');
+    removeRow();
 };
 
 const edit = () => {
@@ -33,18 +34,18 @@ const selectRow = taskId => {
 };
 
 // pega a task que vai ser verificada, editada ou deletada
-const selectTask = taskId => {
+const selectDivTask = taskId => {
     let task = window.document.getElementById('task' + taskId);
     return task;
 };
 
 // pega tanto a função que o usuário quer executar 
 let taskId = '';
-let selectedTask = '';
+let selectedDivTask = '';
 let selectedRow = '';
 const options = event => {
     taskId = event.target.id;
-    selectedTask = selectTask(taskId);
+    selectedDivTask = selectDivTask(taskId);
     selectedRow = selectRow(taskId)
     optionClass[event.target.className]();
 };
