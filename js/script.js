@@ -13,6 +13,7 @@ const removeRow = () => {
 const check = () => {
     removeRow();
     selectTask().status = true;
+    // addChecked(selectTask());
     // console.log(selectTask());
 };
 
@@ -23,6 +24,7 @@ const edit = () => {
 const exclude = () => {
     removeRow();
     selectTask().status = null;
+    // addExcluded(selectTask());
     // console.log(selectTask());
 };
 
