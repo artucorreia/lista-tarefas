@@ -1,3 +1,13 @@
+const addExcluded = () => {
+    console.log('Task deletada');
+    console.log(tasks);
+};
+
+const addChecked = () => {
+    console.log('Task adicionada');
+    console.log(tasks);
+};
+
 const selectTask = () => { 
     for (let i = 0; i < tasks.length ; i++) {
         if(tasks[i].name == selectedDivTask.innerHTML) {
@@ -13,19 +23,19 @@ const removeRow = () => {
 const check = () => {
     removeRow();
     selectTask().status = true;
-    // addChecked(selectTask());
-    // console.log(selectTask());
+    addChecked();
 };
 
 const edit = () => {
+    selectTask();
     console.log('vai editar: ' + selectedDivTask.innerHTML);
+    console.log(selectTask());
 };
 
 const exclude = () => {
     removeRow();
     selectTask().status = null;
-    // addExcluded(selectTask());
-    // console.log(selectTask());
+    addExcluded();
 };
 
 // direciona para check, edit, exclude
