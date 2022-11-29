@@ -14,48 +14,30 @@ const elementsCompleted = task => {
 
 const selectTask = () => { 
     for (let i = 0; i < tasks.length; i++) {
-        if(tasks[i].name == selectedDivTask.innerHTML) {
-            return tasks[i];
+        if (selectedDivBtns.hidden) {
+            if(tasks[i].name == checkpoint) {
+                return tasks[i];
+            }
+        } else {
+            if(tasks[i].name == selectedDivTask.innerHTML) {
+                return tasks[i];
+            }
+
         }
     }
 };
 
-const removeRow = () => {
-    sectionTasks.removeChild(selectedRow);
-};
+const removeRow = () => sectionTasks.removeChild(selectedRow);
 
+// marcar como feita
 const check = () => {
     removeRow();
-    selectTask().status = true;
-    let elementos = elementsCompleted(selectTask())
-    sectionTasksCompleteds.appendChild(elementos)
+    selectTask(selectedDivTask.innerHTML).status = true;
+    let elementos = elementsCompleted(selectTask());
+    sectionTasksCompleteds.appendChild(elementos);
 };
 
-const clearTaskText = () => selectedDivTask.innerText = '';
-
-const inputEdition = text => {
-    const input = window.document.createElement('input')
-    input.setAttribute('type', 'text');
-    input.setAttribute('id', 'newEdition');
-    input.setAttribute('value', text);
-    return input;
-}
-
-const changeBtns = () => {
-
-}
-
-const edit = () => {
-    // selectTask();
-    // console.log(selectTask().name)
-    // console.log('vai editar: ' + selectedDivTask.innerHTML);
-    // console.log(inputEdition());
-    let elemento = inputEdition(selectTask().name);
-    clearTaskText();
-    selectedDivTask.appendChild(elemento);
-    changeBtns()
-};
-
+// excluir task
 const exclude = () => {
     removeRow();
     selectTask().status = null;
@@ -63,15 +45,105 @@ const exclude = () => {
     sectionTasksExcludeds.appendChild(elementos);
 };
 
+const changeHidden = btns => {
+    btns.hidden = false;
+    let btnEdit = window.document.getElementById('btnsEdit');
+    btnEdit.hidden = true;
+};
+
+const cancelEdition = () => {
+    selectedDivTask.innerHTML = checkpoint;
+    changeHidden(selectedDivBtns);
+};
+
+const confirmEdition = () => {
+    const input = window.document.getElementById('newEdition');
+    selectTask().name = input.value;
+    selectedDivTask.innerText = input.value;
+    console.log(selectedDivTask.innerText);
+    changeHidden(selectedDivBtns);
+};
+
+const optionId = {
+    'confirmEdition': () => confirmEdition(),
+    'cancelEdition':  () => cancelEdition() 
+};
+
+const optionsEdit = event => optionId[event.target.id](); 
+
+const btnsEdit = btns => btns.addEventListener('click', optionsEdit); 
+
+const clearTaskText = () => selectedDivTask.innerText = '';
+
+
+let checkpoint = '';
+const createCheckpoint = () => checkpoint = selectedDivTask.innerHTML;
+
+const inputEdition = text => {
+    const input = window.document.createElement('input');
+    input.setAttribute('type', 'text');
+    input.setAttribute('id', 'newEdition');
+    input.setAttribute('value', text);
+    return input;
+}
+
+const elementsEdition = () => {
+    const btns = window.document.createElement('div'); 
+    btns.className = 'btn-group';
+    btns.id = 'btnsEdit'
+    btns.ariaRoleDescription = 'group';
+    const btnConfirm = window.document.createElement('button'); 
+    btnConfirm.className = 'btn btn-secondary';
+    btnConfirm.id = 'confirmEdition';
+    const btnCancel = window.document.createElement('button');
+    btnCancel.className = 'btn btn-secondary';
+    btnCancel.id = 'cancelEdition';
+    const iconConfirm = window.document.createElement('i');
+    iconConfirm.className = 'fas fa-pencil';
+    iconConfirm.id = 'confirmEdition';
+    const iconCancel = window.document.createElement('i');
+    iconCancel.className = 'fas fa-xmark fa-marge';
+    iconCancel.id = 'cancelEdition';
+    btnConfirm.appendChild(iconConfirm);
+    btnCancel.appendChild(iconCancel);
+    btns.appendChild(btnConfirm);
+    btns.appendChild(btnCancel);
+    btnsEdit(btns);
+    return btns;
+}
+
+const hiddenBtns = btns => btns.hidden = true;
+
+// editar task
+const edit = () => {
+    hiddenBtns(selectedDivBtns);
+    createCheckpoint();
+    let elemento = inputEdition(selectTask().name);
+    clearTaskText();
+    selectedDivTask.appendChild(elemento);
+    selectedColBtns.appendChild(elementsEdition());
+};
+
 // direciona para check, edit ou exclude
 const optionClass = {
     'fas fa-check':  () => check(),
-    'fas fa-pencil': () => edit(),
     'fas fa-trash':  () => exclude(),
+    'fas fa-pencil': () => edit(),
     'btn btn-secondary check':  () => check(),
-    'btn btn-secondary edit':   () => edit(),
-    'btn btn-secondary delete': () => exclude()
+    'btn btn-secondary delete': () => exclude(),
+    'btn btn-secondary edit':   () => edit()
 };
+
+// pega a div dos btns
+const selectDivBtns = () => {
+    let btns = window.document.getElementById('btns' + taskId);
+    return btns;
+}
+
+const selectColBtns = () => {
+    let col = window.document.getElementById('col' + taskId);
+    return col;
+}
 
 // pega a row da task
 const selectRow = taskId => {
@@ -89,10 +161,14 @@ const selectDivTask = taskId => {
 let taskId = '';
 let selectedDivTask = '';
 let selectedRow = '';
+let selectedDivBtns = '';
+let selectedColBtns = '';
 const options = event => {
     taskId = event.target.id;
     selectedDivTask = selectDivTask(taskId);
     selectedRow = selectRow(taskId);
+    selectedDivBtns = selectDivBtns(taskId);
+    selectedColBtns = selectColBtns(taskId);
     optionClass[event.target.className]();
 };
 
@@ -119,13 +195,14 @@ const elementsPrime = task => {
     divColTask.className = 'col';
     const divColBtns = window.document.createElement('div'); 
     divColBtns.className = 'col';
+    divColBtns.id = 'col' + id;
     const divTask = window.document.createElement('div'); 
     divTask.className = 'task';
     divTask.id = 'task' + id;
     const divGroupBtns = window.document.createElement('div'); 
     divGroupBtns.className = 'btn-group mr-2';
     divGroupBtns.ariaRoleDescription = 'group';
-    divGroupBtns.ariaLabel = 'Segundo grupo';
+    divGroupBtns.id = 'btns' + id;
     const btnCheck = window.document.createElement('button');
     btnCheck.className = 'btn btn-secondary check';
     btnCheck.id = id;
@@ -165,21 +242,21 @@ const prime = () => {
     sectionTasks.hidden = false;
     sectionTasksCompleteds.hidden = true;
     sectionTasksExcludeds.hidden = true;
-    btnClearAll.hidden = true
+    btnClearAll.hidden = true;
 };
 
 const completed = () => {
     sectionTasks.hidden = true;
     sectionTasksCompleteds.hidden = false;
     sectionTasksExcludeds.hidden = true;
-    btnClearAll.hidden = false
+    btnClearAll.hidden = false;
 };
 
 const excluded = () => {
     sectionTasks.hidden = true;
     sectionTasksCompleteds.hidden = true;
     sectionTasksExcludeds.hidden = false;
-    btnClearAll.hidden = false
+    btnClearAll.hidden = false;
 };
 
 const optionsNavbar = {
@@ -191,7 +268,7 @@ const optionsNavbar = {
 // botão limpar tudo
 const btnClearAll = window.document.getElementById('clearAll');
 btnClearAll.addEventListener('click', () => {
-    let confirm = window.confirm('Deseja apagar todos os itens desta aba?')
+    let confirm = window.confirm('Deseja apagar todos os itens desta aba?');
     if (confirm) {
         if (!sectionTasksCompleteds.hidden) {
             sectionTasksCompleteds.innerHTML = '';
@@ -200,7 +277,7 @@ btnClearAll.addEventListener('click', () => {
         }
     }
 });
-btnClearAll.hidden = true
+btnClearAll.hidden = true;
 
 // abas navbar
 const title = window.document.getElementById('title');
