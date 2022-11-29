@@ -31,17 +31,36 @@ const check = () => {
     sectionTasksCompleteds.appendChild(elementos)
 };
 
+const clearTaskText = () => selectedDivTask.innerText = '';
+
+const inputEdition = text => {
+    const input = window.document.createElement('input')
+    input.setAttribute('type', 'text');
+    input.setAttribute('id', 'newEdition');
+    input.setAttribute('value', text);
+    return input;
+}
+
+const changeBtns = () => {
+
+}
+
 const edit = () => {
-    selectTask();
-    console.log('vai editar: ' + selectedDivTask.innerHTML);
-    console.log(selectTask());
+    // selectTask();
+    // console.log(selectTask().name)
+    // console.log('vai editar: ' + selectedDivTask.innerHTML);
+    // console.log(inputEdition());
+    let elemento = inputEdition(selectTask().name);
+    clearTaskText();
+    selectedDivTask.appendChild(elemento);
+    changeBtns()
 };
 
 const exclude = () => {
     removeRow();
     selectTask().status = null;
-    let elementos = elementsExcluded(selectTask())
-    sectionTasksExcludeds.appendChild(elementos)
+    let elementos = elementsExcluded(selectTask());
+    sectionTasksExcludeds.appendChild(elementos);
 };
 
 // direciona para check, edit ou exclude
@@ -146,18 +165,21 @@ const prime = () => {
     sectionTasks.hidden = false;
     sectionTasksCompleteds.hidden = true;
     sectionTasksExcludeds.hidden = true;
+    btnClearAll.hidden = true
 };
 
 const completed = () => {
     sectionTasks.hidden = true;
     sectionTasksCompleteds.hidden = false;
     sectionTasksExcludeds.hidden = true;
+    btnClearAll.hidden = false
 };
 
 const excluded = () => {
     sectionTasks.hidden = true;
     sectionTasksCompleteds.hidden = true;
     sectionTasksExcludeds.hidden = false;
+    btnClearAll.hidden = false
 };
 
 const optionsNavbar = {
@@ -166,10 +188,24 @@ const optionsNavbar = {
     'excluded':  () => excluded()
 };
 
+// botão limpar tudo
+const btnClearAll = window.document.getElementById('clearAll');
+btnClearAll.addEventListener('click', () => {
+    let confirm = window.confirm('Deseja apagar todos os itens desta aba?')
+    if (confirm) {
+        if (!sectionTasksCompleteds.hidden) {
+            sectionTasksCompleteds.innerHTML = '';
+        } else {
+            sectionTasksExcludeds.innerHTML = '';
+        }
+    }
+});
+btnClearAll.hidden = true
+
+// abas navbar
 const title = window.document.getElementById('title');
 title.addEventListener('click', prime);
 
-// abas navbar
 const sectionTasksCompleteds = window.document.getElementById('tasksCompleteds');
 const sectionTasksExcludeds = window.document.getElementById('tasksExcludeds');
 const btnPrime = window.document.getElementById('prime');
@@ -215,4 +251,3 @@ newTask.addEventListener('keypress', event => {
         document.getElementById('createNewTask').click();
     }
 });
-
