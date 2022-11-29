@@ -53,6 +53,7 @@ const changeHidden = btns => {
 
 const cancelEdition = () => {
     selectedDivTask.innerHTML = checkpoint;
+    console.log(selectedDivBtns)
     changeHidden(selectedDivBtns);
 };
 
@@ -60,7 +61,8 @@ const confirmEdition = () => {
     const input = window.document.getElementById('newEdition');
     selectTask().name = input.value;
     selectedDivTask.innerText = input.value;
-    console.log(selectedDivTask.innerText);
+    // console.log(selectedDivTask.innerText);
+    console.log(selectedDivBtns)
     changeHidden(selectedDivBtns);
 };
 
@@ -135,12 +137,12 @@ const optionClass = {
 };
 
 // pega a div dos btns
-const selectDivBtns = () => {
+const selectDivBtns = taskId => {
     let btns = window.document.getElementById('btns' + taskId);
     return btns;
 }
 
-const selectColBtns = () => {
+const selectColBtns = taskId => {
     let col = window.document.getElementById('col' + taskId);
     return col;
 }
