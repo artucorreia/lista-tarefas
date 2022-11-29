@@ -1,6 +1,8 @@
-body {
-  background-color: rgb(15, 15, 15);
+#main {
+  background-color: rgb(30, 30, 30);
+  color: white;
 }
+
 .tasks {
   background-color: rgb(30, 30, 30);
   width: auto;
@@ -9,6 +11,7 @@ body {
   margin: auto; 
   border-radius: 15px;
 }
+
 .task {
   text-align: center;
   height: auto;
@@ -19,16 +22,19 @@ body {
   background-color: rgb(138, 138, 138);
   border-radius: 30px;
 }
+
 .cab {
   margin-top: 30px;
   text-align: center;
 }
+
 #createNewTask {
   background-color: rgb(50, 50, 50);
   margin-right: 7px;
   color: white;
   height: 40px;
 }
+
 img {
   margin-right: 5px;
 }
