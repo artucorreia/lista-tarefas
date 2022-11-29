@@ -178,7 +178,9 @@ const btnExcluded = window.document.getElementById('excluded');
 
 const navbar = window.document.getElementById('navbarNav');
 navbar.addEventListener('click', (event) => {
-    optionsNavbar[event.target.id]();
+    if (event.target.id != 'navbarNav') {
+        optionsNavbar[event.target.id]();
+    }
 });
 
 // nova task
