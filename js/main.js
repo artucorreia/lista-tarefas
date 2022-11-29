@@ -1,3 +1,17 @@
+// cria os elementos que vão conter as tasks completas
+const elementsExcluded = task => {
+    const divTask = window.document.createElement('div');
+    divTask.innerHTML = task.name;
+    return divTask;
+}
+
+// cria os elementos que vão conter as tasks deletadas
+const elementsCompleted = task => {
+    const divTask = window.document.createElement('div');
+    divTask.innerHTML = task.name;
+    return divTask;
+}
+
 const selectTask = () => { 
     for (let i = 0; i < tasks.length; i++) {
         if(tasks[i].name == selectedDivTask.innerHTML) {
@@ -13,6 +27,8 @@ const removeRow = () => {
 const check = () => {
     removeRow();
     selectTask().status = true;
+    let elementos = elementsCompleted(selectTask())
+    sectionTasksCompleteds.appendChild(elementos)
 };
 
 const edit = () => {
@@ -24,9 +40,11 @@ const edit = () => {
 const exclude = () => {
     removeRow();
     selectTask().status = null;
+    let elementos = elementsExcluded(selectTask())
+    sectionTasksExcludeds.appendChild(elementos)
 };
 
-// direciona para check, edit, exclude
+// direciona para check, edit ou exclude
 const optionClass = {
     'fas fa-check':  () => check(),
     'fas fa-pencil': () => edit(),
@@ -72,7 +90,7 @@ const createId = () => {
 };
 
 let id = '';
-const createAndOrganizeElements = task => {
+const elementsPrime = task => {
     id = createId();
     // criando 
     const divRow = window.document.createElement('div'); 
@@ -123,38 +141,6 @@ const createAndOrganizeElements = task => {
     return divRow;
 };
 
-// nova tarefa
-let tasks = [];
-const createTask = name => {
-    return {
-        'name': name,
-        'status': false
-    }
-};
-
-const sectionTasks = window.document.getElementById('tasks');
-const createNewTask = window.document.getElementById('createNewTask');
-createNewTask.addEventListener('click', () => {
-    let newTaskTxt = window.document.getElementById('newTask');
-    let newTaskName = newTaskTxt.value;
-    if (newTaskName != '') {
-        const task = createTask(newTaskName); 
-        tasks.push(task);
-        sectionTasks.appendChild(createAndOrganizeElements(task));
-    } else {
-        alert('Adicione uma tarefa');
-    }
-    clearInput(newTaskTxt);
-});
-
-// adicionando key
-const keyEnter = window.document.getElementById('newTask');
-newTask.addEventListener('keypress', event => {
-    if (event.key === 'Enter') {
-        document.getElementById('createNewTask').click();
-    }
-});
-
 // configurações da navbar
 const prime = () => {
     sectionTasks.hidden = false;
@@ -166,14 +152,12 @@ const completed = () => {
     sectionTasks.hidden = true;
     sectionTasksCompleteds.hidden = false;
     sectionTasksExcludeds.hidden = true;
-    console.log('completed ok');
 };
 
 const excluded = () => {
     sectionTasks.hidden = true;
     sectionTasksCompleteds.hidden = true;
     sectionTasksExcludeds.hidden = false;
-    console.log('deletados ok');
 };
 
 const optionsNavbar = {
@@ -182,12 +166,51 @@ const optionsNavbar = {
     'excluded':  () => excluded()
 };
 
+const title = window.document.getElementById('title');
+title.addEventListener('click', prime);
+
+// abas navbar
 const sectionTasksCompleteds = window.document.getElementById('tasksCompleteds');
 const sectionTasksExcludeds = window.document.getElementById('tasksExcludeds');
 const btnPrime = window.document.getElementById('prime');
 const btnCompleted = window.document.getElementById('completed');
 const btnExcluded = window.document.getElementById('excluded');
+
 const navbar = window.document.getElementById('navbarNav');
 navbar.addEventListener('click', (event) => {
     optionsNavbar[event.target.id]();
 });
+
+// nova task
+let tasks = [];
+const createTask = name => {
+    return {
+        'name': name,
+        'status': false
+    }
+};
+
+const sectionTasks = window.document.getElementById('tasks');
+const createNewTask = window.document.getElementById('createNewTask');
+createNewTask.addEventListener('click', () => {
+    prime();
+    let newTaskTxt = window.document.getElementById('newTask');
+    let newTaskName = newTaskTxt.value;
+    if (newTaskName != '') {
+        const task = createTask(newTaskName); 
+        tasks.push(task);
+        sectionTasks.appendChild(elementsPrime(task));
+    } else {
+        alert('Adicione uma tarefa');
+    }
+    clearInput(newTaskTxt);
+});
+
+// adicionando key(enter)
+const keyEnter = window.document.getElementById('newTask');
+newTask.addEventListener('keypress', event => {
+    if (event.key === 'Enter') {
+        document.getElementById('createNewTask').click();
+    }
+});
+
