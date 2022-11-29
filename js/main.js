@@ -1,15 +1,5 @@
-const addExcluded = () => {
-    console.log('Task deletada');
-    console.log(tasks);
-};
-
-const addChecked = () => {
-    console.log('Task adicionada');
-    console.log(tasks);
-};
-
 const selectTask = () => { 
-    for (let i = 0; i < tasks.length ; i++) {
+    for (let i = 0; i < tasks.length; i++) {
         if(tasks[i].name == selectedDivTask.innerHTML) {
             return tasks[i];
         }
@@ -23,7 +13,6 @@ const removeRow = () => {
 const check = () => {
     removeRow();
     selectTask().status = true;
-    addChecked();
 };
 
 const edit = () => {
@@ -35,16 +24,15 @@ const edit = () => {
 const exclude = () => {
     removeRow();
     selectTask().status = null;
-    addExcluded();
 };
 
 // direciona para check, edit, exclude
 const optionClass = {
-    'fas fa-check': () => check(),
+    'fas fa-check':  () => check(),
     'fas fa-pencil': () => edit(),
-    'fas fa-trash': () => exclude(),
-    'btn btn-secondary check': () => check(),
-    'btn btn-secondary edit': () => edit(),
+    'fas fa-trash':  () => exclude(),
+    'btn btn-secondary check':  () => check(),
+    'btn btn-secondary edit':   () => edit(),
     'btn btn-secondary delete': () => exclude()
 };
 
@@ -60,7 +48,7 @@ const selectDivTask = taskId => {
     return task;
 };
 
-// pega tanto a função que o usuário quer executar 
+// identifica função que o usuário quer executar 
 let taskId = '';
 let selectedDivTask = '';
 let selectedRow = '';
@@ -165,4 +153,41 @@ newTask.addEventListener('keypress', event => {
     if (event.key === 'Enter') {
         document.getElementById('createNewTask').click();
     }
+});
+
+// configurações da navbar
+const prime = () => {
+    sectionTasks.hidden = false;
+    sectionTasksCompleteds.hidden = true;
+    sectionTasksExcludeds.hidden = true;
+};
+
+const completed = () => {
+    sectionTasks.hidden = true;
+    sectionTasksCompleteds.hidden = false;
+    sectionTasksExcludeds.hidden = true;
+    console.log('completed ok');
+};
+
+const excluded = () => {
+    sectionTasks.hidden = true;
+    sectionTasksCompleteds.hidden = true;
+    sectionTasksExcludeds.hidden = false;
+    console.log('deletados ok');
+};
+
+const optionsNavbar = {
+    'prime':     () => prime(),
+    'completed': () => completed(),
+    'excluded':  () => excluded()
+};
+
+const sectionTasksCompleteds = window.document.getElementById('tasksCompleteds');
+const sectionTasksExcludeds = window.document.getElementById('tasksExcludeds');
+const btnPrime = window.document.getElementById('prime');
+const btnCompleted = window.document.getElementById('completed');
+const btnExcluded = window.document.getElementById('excluded');
+const navbar = window.document.getElementById('navbarNav');
+navbar.addEventListener('click', (event) => {
+    optionsNavbar[event.target.id]();
 });
