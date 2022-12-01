@@ -3,14 +3,14 @@ const elementsExcluded = task => {
     const divTask = window.document.createElement('div');
     divTask.innerHTML = task.name;
     return divTask;
-}
+};
 
 // cria os elementos que vão conter as tasks deletadas
 const elementsCompleted = task => {
     const divTask = window.document.createElement('div');
     divTask.innerHTML = task.name;
     return divTask;
-}
+};
 
 const selectTask = () => { 
     for (let i = 0; i < tasks.length; i++) {
@@ -51,11 +51,13 @@ const changeHidden = btns => {
 };
 
 const cancelEdition = () => {
+    open = false;
     selectedDivTask.innerHTML = checkpoint;
     changeHidden(selectedDivBtns);
 };
 
 const confirmEdition = () => {
+    open = false;
     const input = window.document.getElementById('newEdition');
     selectTask().name = input.value;
     selectedDivTask.innerText = input.value;
@@ -77,18 +79,27 @@ const clearTaskText = () => selectedDivTask.innerText = '';
 let checkpoint = '';
 const createCheckpoint = () => checkpoint = selectedDivTask.innerHTML;
 
+const keyEdit = inp => {
+    inp.addEventListener('keypress', event => {
+        if (event.key === 'Enter') {
+            document.getElementById('confirmEdition').click();
+        }
+    });
+};
+
 const inputEdition = text => {
     const input = window.document.createElement('input');
     input.setAttribute('type', 'text');
     input.setAttribute('id', 'newEdition');
     input.setAttribute('value', text);
+    keyEdit(input);
     return input;
-}
+};
 
 const elementsEdit = () => {
     const btns = window.document.createElement('div'); 
     btns.className = 'btn-group';
-    btns.id = 'btnsEdit'
+    btns.id = 'btnsEdit';
     btns.ariaRoleDescription = 'group';
     const btnConfirm = window.document.createElement('button'); 
     btnConfirm.className = 'btn btn-secondary';
@@ -108,7 +119,7 @@ const elementsEdit = () => {
     btns.appendChild(btnCancel);
     btnsEdit(btns);
     return btns;
-}
+};
 
 const elementsEdition = elementsEdit();
 let firstTime = true;
@@ -120,12 +131,20 @@ const openElements = () => {
     elementsEdition.hidden = false;
     before = selectedColBtns; 
     firstTime = false;
-}
+};
 
 const hiddenBtns = btns => btns.hidden = true;
 
+const verificationEdit = (x) => {
+    if (x) {
+        return optionId['cancelEdition']();
+    }
+};
+
 // editar task
+let open = false
 const edit = () => {
+    open = true
     hiddenBtns(selectedDivBtns);
     createCheckpoint();
     let elemento = inputEdition(selectTask().name);
@@ -148,12 +167,12 @@ const optionClass = {
 const selectDivBtns = taskId => {
     let btns = window.document.getElementById('btns' + taskId);
     return btns;
-}
+};
 
 const selectColBtns = taskId => {
     let col = window.document.getElementById('col' + taskId);
     return col;
-}
+};
 
 // pega a row da task
 const selectRow = taskId => {
@@ -174,6 +193,7 @@ let selectedRow = '';
 let selectedDivBtns = '';
 let selectedColBtns = '';
 const options = event => {
+    verificationEdit(open);
     taskId = event.target.id;
     selectedDivTask = selectDivTask(taskId);
     selectedRow = selectRow(taskId);
@@ -300,9 +320,10 @@ const btnCompleted = window.document.getElementById('completed');
 const btnExcluded = window.document.getElementById('excluded');
 
 const navbar = window.document.getElementById('navbarNav');
-navbar.addEventListener('click', (event) => {
-    if (event.target.id != 'navbarNav') {
-        optionsNavbar[event.target.id]();
+navbar.addEventListener('click', event => {
+    const evento = event.target.id
+    if (evento != 'navbarNav') {
+        optionsNavbar[evento]();
     }
 });
 
