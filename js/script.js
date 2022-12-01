@@ -46,14 +46,12 @@ const exclude = () => {
 };
 
 const changeHidden = btns => {
+    elementsEdition.hidden = true;
     btns.hidden = false;
-    let btnEdit = window.document.getElementById('btnsEdit');
-    btnEdit.hidden = true;
 };
 
 const cancelEdition = () => {
     selectedDivTask.innerHTML = checkpoint;
-    console.log(selectedDivBtns)
     changeHidden(selectedDivBtns);
 };
 
@@ -61,8 +59,6 @@ const confirmEdition = () => {
     const input = window.document.getElementById('newEdition');
     selectTask().name = input.value;
     selectedDivTask.innerText = input.value;
-    // console.log(selectedDivTask.innerText);
-    console.log(selectedDivBtns)
     changeHidden(selectedDivBtns);
 };
 
@@ -89,7 +85,7 @@ const inputEdition = text => {
     return input;
 }
 
-const elementsEdition = () => {
+const elementsEdit = () => {
     const btns = window.document.createElement('div'); 
     btns.className = 'btn-group';
     btns.id = 'btnsEdit'
@@ -114,6 +110,18 @@ const elementsEdition = () => {
     return btns;
 }
 
+const elementsEdition = elementsEdit();
+let firstTime = true;
+let before = '';
+const openElements = () => {
+    if (firstTime || selectedColBtns != before) {
+        selectedColBtns.appendChild(elementsEdition);
+    }
+    elementsEdition.hidden = false;
+    before = selectedColBtns; 
+    firstTime = false;
+}
+
 const hiddenBtns = btns => btns.hidden = true;
 
 // editar task
@@ -123,7 +131,7 @@ const edit = () => {
     let elemento = inputEdition(selectTask().name);
     clearTaskText();
     selectedDivTask.appendChild(elemento);
-    selectedColBtns.appendChild(elementsEdition());
+    openElements();
 };
 
 // direciona para check, edit ou exclude
@@ -240,21 +248,21 @@ const elementsPrime = task => {
 };
 
 // configurações da navbar
-const prime = () => {
+const AbaPrime = () => {
     sectionTasks.hidden = false;
     sectionTasksCompleteds.hidden = true;
     sectionTasksExcludeds.hidden = true;
     btnClearAll.hidden = true;
 };
 
-const completed = () => {
+const AbaCompleted = () => {
     sectionTasks.hidden = true;
     sectionTasksCompleteds.hidden = false;
     sectionTasksExcludeds.hidden = true;
     btnClearAll.hidden = false;
 };
 
-const excluded = () => {
+const AbaExcluded = () => {
     sectionTasks.hidden = true;
     sectionTasksCompleteds.hidden = true;
     sectionTasksExcludeds.hidden = false;
@@ -262,9 +270,9 @@ const excluded = () => {
 };
 
 const optionsNavbar = {
-    'prime':     () => prime(),
-    'completed': () => completed(),
-    'excluded':  () => excluded()
+    'prime':     () => AbaPrime(),
+    'completed': () => AbaCompleted(),
+    'excluded':  () => AbaExcluded()
 };
 
 // botão limpar tudo
@@ -310,7 +318,7 @@ const createTask = name => {
 const sectionTasks = window.document.getElementById('tasks');
 const createNewTask = window.document.getElementById('createNewTask');
 createNewTask.addEventListener('click', () => {
-    prime();
+    AbaPrime();
     let newTaskTxt = window.document.getElementById('newTask');
     let newTaskName = newTaskTxt.value;
     if (newTaskName != '') {
