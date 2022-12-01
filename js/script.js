@@ -291,7 +291,7 @@ btnClearAll.hidden = true;
 
 // abas navbar
 const title = window.document.getElementById('title');
-title.addEventListener('click', prime);
+title.addEventListener('click', AbaPrime);
 
 const sectionTasksCompleteds = window.document.getElementById('tasksCompleteds');
 const sectionTasksExcludeds = window.document.getElementById('tasksExcludeds');
