@@ -77,7 +77,6 @@ const btnsEdit = btns => btns.addEventListener('click', optionsEdit);
 
 const clearTaskText = () => selectedDivTask.innerText = '';
 
-
 let checkpoint = '';
 const createCheckpoint = () => checkpoint = selectedDivTask.innerHTML;
 
