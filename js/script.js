@@ -50,12 +50,23 @@ const cancelEdition = () => {
     changeHidden(selectedDivBtns);
 };
 
+const inputnull = x => {
+    if (x == '') {
+        optionId['cancelEdition']();
+        return true;
+    } else {
+        return false;
+    }
+};
+
 const confirmEdition = () => {
     open = false;
     const input = window.document.getElementById('newEdition');
-    selectTask().name = input.value;
-    selectedDivTask.innerText = input.value;
-    changeHidden(selectedDivBtns);
+    if (!inputnull(input.value)) {
+        selectTask().name = input.value;
+        selectedDivTask.innerText = input.value;
+        changeHidden(selectedDivBtns);
+    }
 };
 
 const optionId = {
