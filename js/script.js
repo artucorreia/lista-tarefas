@@ -1,6 +1,7 @@
 // cria os elementos que vão conter as tasks completas
 const elementsExcluded = task => {
     const divTask = window.document.createElement('div');
+    // divTask.className = 't';
     divTask.innerHTML = task.name;
     return divTask;
 };
@@ -8,6 +9,7 @@ const elementsExcluded = task => {
 // cria os elementos que vão conter as tasks deletadas
 const elementsCompleted = task => {
     const divTask = window.document.createElement('div');
+    // divTask.className = 'divss';
     divTask.innerHTML = task.name;
     return divTask;
 };
@@ -135,7 +137,7 @@ const openElements = () => {
 
 const hiddenBtns = btns => btns.hidden = true;
 
-const verificationEdit = (x) => {
+const verificationEdit = x => {
     if (x) {
         return optionId['cancelEdition']();
     }
@@ -222,9 +224,10 @@ const elementsPrime = task => {
     divRow.className = 'row';
     divRow.id = 'row' + id;
     const divColTask = window.document.createElement('div'); 
-    divColTask.className = 'col';
+    divColTask.className = 'col-7';
+    divColTask.id = 'teste'
     const divColBtns = window.document.createElement('div'); 
-    divColBtns.className = 'col';
+    divColBtns.className = 'col-3 loc';
     divColBtns.id = 'col' + id;
     const divTask = window.document.createElement('div'); 
     divTask.className = 'task';

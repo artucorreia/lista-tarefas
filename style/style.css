@@ -1,25 +1,39 @@
-#main {
-  background-color: rgb(30, 30, 30);
+* {
+  font-size: 13pt;
+}
+
+body {
+  background-color: rgb(20, 20, 20);
   color: white;
 }
 
+.row {
+  width: 100%;
+  margin-bottom: 1%;
+}
+
 .tasks {
-  background-color: rgb(30, 30, 30);
-  width: auto;
-  height: auto;
+  background-color: rgb(20, 20, 20);
   color: white;
-  margin: auto; 
+  margin: auto;
   border-radius: 15px;
+}
+
+.btn-secondary {
+  background-color: rgb(52, 58, 64);
+  border-color: rgb(52, 58, 64);
+}
+
+.col {
+  margin-left: auto;
 }
 
 .task {
   text-align: center;
-  height: auto;
-  padding: 10px;
-  width: 250px;
-  /* margin: auto; */
-  /* margin-top: 30px; */
-  background-color: rgb(138, 138, 138);
+  padding: 1%;
+  width: 30%;
+  margin-left: auto;
+  background-color: rgb(52, 58, 64);
   border-radius: 30px;
 }
 
@@ -29,10 +43,9 @@
 }
 
 #createNewTask {
-  background-color: rgb(50, 50, 50);
+  background-color: rgb(52, 58, 64);
   margin-right: 7px;
   color: white;
-  height: 40px;
 }
 
 img {
