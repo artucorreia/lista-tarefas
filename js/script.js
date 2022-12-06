@@ -113,7 +113,7 @@ const elementsEdit = () => {
     btnCancel.className = 'btn btn-secondary';
     btnCancel.id = 'cancelEdition';
     const iconConfirm = window.document.createElement('i');
-    iconConfirm.className = 'fas fa-pencil';
+    iconConfirm.className = 'fas fa-check';
     iconConfirm.id = 'confirmEdition';
     const iconCancel = window.document.createElement('i');
     iconCancel.className = 'fas fa-xmark fa-marge';

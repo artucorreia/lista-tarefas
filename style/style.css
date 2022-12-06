@@ -64,4 +64,5 @@ hr {
   margin-bottom: 10px;
   background-color: rgb(52, 58, 64);
   border-radius: 30px;
+  text-decoration: line-through;
 }
