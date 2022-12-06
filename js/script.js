@@ -1,15 +1,7 @@
-// cria os elementos que vão conter as tasks completas
-const elementsExcluded = task => {
+// cria os elementos que vão conter as tasks completas ou deletadas
+const secondaryElements = task => {
     const divTask = window.document.createElement('div');
-    // divTask.className = 't';
-    divTask.innerHTML = task.name;
-    return divTask;
-};
-
-// cria os elementos que vão conter as tasks deletadas
-const elementsCompleted = task => {
-    const divTask = window.document.createElement('div');
-    // divTask.className = 'divss';
+    divTask.className = 'div-secondary';
     divTask.innerHTML = task.name;
     return divTask;
 };
@@ -35,16 +27,16 @@ const removeRow = () => sectionTasks.removeChild(selectedRow);
 const check = () => {
     removeRow();
     selectTask(selectedDivTask.innerHTML).status = true;
-    let elementos = elementsCompleted(selectTask());
-    sectionTasksCompleteds.appendChild(elementos);
+    let elements = secondaryElements(selectTask());
+    sectionTasksCompleteds.appendChild(elements);
 };
 
 // excluir task
 const exclude = () => {
     removeRow();
     selectTask().status = null;
-    let elementos = elementsExcluded(selectTask());
-    sectionTasksExcludeds.appendChild(elementos);
+    let elements = secondaryElements(selectTask());
+    sectionTasksExcludeds.appendChild(elements);
 };
 
 const changeHidden = btns => {
@@ -93,6 +85,7 @@ const inputEdition = text => {
     input.setAttribute('type', 'text');
     input.setAttribute('id', 'newEdition');
     input.setAttribute('value', text);
+    input.style.textAlign = 'center';
     keyEdit(input);
     return input;
 };

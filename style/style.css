@@ -2,39 +2,13 @@
   font-size: 13pt;
 }
 
+img {
+  margin-right: 5px;
+}
+
 body {
   background-color: rgb(20, 20, 20);
   color: white;
-}
-
-.row {
-  width: 100%;
-  margin-bottom: 1%;
-}
-
-.tasks {
-  background-color: rgb(20, 20, 20);
-  color: white;
-  margin: auto;
-  border-radius: 15px;
-}
-
-.btn-secondary {
-  background-color: rgb(52, 58, 64);
-  border-color: rgb(52, 58, 64);
-}
-
-.col {
-  margin-left: auto;
-}
-
-.task {
-  text-align: center;
-  padding: 1%;
-  width: 30%;
-  margin-left: auto;
-  background-color: rgb(52, 58, 64);
-  border-radius: 30px;
 }
 
 .cab {
@@ -48,6 +22,46 @@ body {
   color: white;
 }
 
-img {
-  margin-right: 5px;
+hr {
+  background-color: rgb(52, 58, 64);
+}
+
+.row {
+  width: 100%;
+  margin-bottom: 1%;
+}
+
+.col {
+  margin-left: auto;
+}
+
+.tasks {
+  background-color: rgb(20, 20, 20);
+  color: white;
+  margin: auto;
+  border-radius: 15px;
+}
+
+.task {
+  text-align: center;
+  padding: 10px;
+  width: 250px;
+  margin-left: auto;
+  background-color: rgb(52, 58, 64);
+  border-radius: 30px;
+}
+
+.btn-secondary {
+  background-color: rgb(52, 58, 64);
+  border-color: rgb(52, 58, 64);
+}
+
+.div-secondary {
+  text-align: center;
+  padding: 10px;
+  width: 250px;
+  margin: auto;
+  margin-bottom: 10px;
+  background-color: rgb(52, 58, 64);
+  border-radius: 30px;
 }
