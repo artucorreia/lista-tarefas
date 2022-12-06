@@ -41,10 +41,10 @@ hr {
 .task {
   text-align: center;
   padding: 1%;
-  width: 30%;
+  width: 50%;
   margin-left: auto;
   background-color: rgb(52, 58, 64);
-  border-radius: 30px;
+  border-radius: 15px;
 }
 
 .btn-secondary {
@@ -55,10 +55,10 @@ hr {
 .div-secondary {
   text-align: center;
   padding: 1%;
-  width: 30%;
+  width: 50%;
   margin: auto;
   margin-bottom: 2%;
   background-color: rgb(52, 58, 64);
-  border-radius: 30px;
+  border-radius: 15px;
   text-decoration: line-through;
 }
