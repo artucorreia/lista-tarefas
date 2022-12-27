@@ -368,4 +368,4 @@ newTask.addEventListener('keypress', event => {
 // "responsividade"
 window.addEventListener('load', () => {
     console.log(window.innerWidth)
-})
+});
