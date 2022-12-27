@@ -1,64 +1,96 @@
-img {
-  margin-right: 5px;
+@charset "UTF-8";
+
+:root {
+  --cor1: #141414;
+  --cor2: #343a40;
+  --cor3: #5A6268;
+
+  --fontPadrao: Arial, Helvetica, sans-serif;
+}
+
+* {
+  margin: 0px;
+  padding: 0px;
 }
 
 body {
-  background-color: rgb(20, 20, 20);
+  background-color: var(--cor1);
+  font-family: var(--fontPadrao);
   color: white;
 }
 
-.cab {
+header img {
+  margin-right: 5px;
+}
+
+main .cab {
   margin-top: 30px;
   text-align: center;
+  width: 100%;
 }
 
-#createNewTask {
-  background-color: rgb(52, 58, 64);
-  margin-right: 7px;
+main #createNewTask {
   color: white;
+  margin-right: 7px;
 }
 
-hr {
-  background-color: rgb(52, 58, 64);
+main #createNewTask:hover {
+  background-color: var(--cor3);
 }
 
-.row {
+main hr {
+  background-color: var(--cor2);
+}
+
+main .row {
   width: 100%;
   margin-bottom: 1%;
 }
 
-.col {
-  margin-left: auto;
-}
-
-.tasks {
-  background-color: rgb(20, 20, 20);
+main .tasks {
   color: white;
   margin: auto;
   border-radius: 15px;
 }
 
-.task {
+main .task {
+  background-color: var(--cor2);
   text-align: center;
-  padding: 1%;
-  width: 40%;
   margin-left: auto;
-  background-color: rgb(52, 58, 64);
+  padding: 1.2%;
+  max-width: 240px;
+  min-width: 157px;
+  min-height: 33px;
   border-radius: 15px;
 }
 
-.btn-secondary {
-  background-color: rgb(52, 58, 64);
-  border-color: rgb(52, 58, 64);
+main .btn-secondary {
+  background-color: var(--cor2);
+  border-color: var(--cor2);
 }
 
-.div-secondary {
+main #clearAll {
+  background-color: #DC3545;
+  color: white;
+  padding: 7px;
+  border-radius: 5px;
+  border-style: none;
+  transition-duration: 0.3s;
+}
+
+main #clearAll:hover {
+  background-color: #a32834;
+}
+
+main .div-secondary {
   text-align: center;
-  padding: 1%;
-  width: 40%;
+  padding: 10px;
+  max-width: 240px;
+  min-width: 157px;
+  min-height: 33px;
   margin: auto;
   margin-bottom: 2%;
-  background-color: rgb(52, 58, 64);
+  background-color: var(--cor2);
   border-radius: 15px;
   text-decoration: line-through;
 }
