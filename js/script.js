@@ -219,6 +219,20 @@ const createId = () => {
     return i + aux;
 };
 
+const responsive = (div, width) => {
+    switch (width) {
+        case 0:
+            div.style.textAlign = 'justify';
+            break;
+        case 1:
+            div.style.textAlign = 'center';
+            break;
+        case 2:
+            div.style.textAlign = 'right';
+            break;
+    }
+};
+
 let id = '';
 const elementsPrime = task => {
     id = createId();
@@ -229,8 +243,9 @@ const elementsPrime = task => {
     const divColTask = window.document.createElement('div'); 
     divColTask.className = 'col-6';
     const divColBtns = window.document.createElement('div'); 
-    divColBtns.className = 'col-6';
+    divColBtns.className = 'col-6 groupBtn';
     divColBtns.id = 'col' + id;
+    responsive(divColBtns, widthViewport);
     const divTask = window.document.createElement('div'); 
     divTask.className = 'task';
     divTask.id = 'task' + id;
@@ -365,7 +380,13 @@ newTask.addEventListener('keypress', event => {
     }
 });
 
-// "responsividade"
+
+// "responsividade" 0=gg 1=m 2=pp
+let widthViewport = 0;
 window.addEventListener('load', () => {
-    console.log(window.innerWidth)
+    if (window.screen.width <= 550) {
+        widthViewport = 1;
+    } else if (window.screen.width <= 640) {
+        widthViewport = 2;
+    }
 });

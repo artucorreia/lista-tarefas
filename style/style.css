@@ -4,6 +4,7 @@
   --cor1: #141414;
   --cor2: #343a40;
   --cor3: #5A6268;
+  --cor4: #25282b;
 
   --fontPadrao: Arial, Helvetica, sans-serif;
 }
@@ -66,7 +67,11 @@ main .task {
 
 main .btn-secondary {
   background-color: var(--cor2);
-  border-color: var(--cor2);
+  border-color: var(--cor4);
+}
+
+main .groupBtn {
+  padding: 0px;
 }
 
 main #clearAll {
