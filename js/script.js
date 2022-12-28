@@ -241,9 +241,9 @@ const elementsPrime = task => {
     divRow.className = 'row';
     divRow.id = 'row' + id;
     const divColTask = window.document.createElement('div'); 
-    divColTask.className = 'col-6';
+    divColTask.className = 'col-7';
     const divColBtns = window.document.createElement('div'); 
-    divColBtns.className = 'col-6 groupBtn';
+    divColBtns.className = 'col-3';
     divColBtns.id = 'col' + id;
     responsive(divColBtns, widthViewport);
     const divTask = window.document.createElement('div'); 
