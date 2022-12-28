@@ -371,10 +371,10 @@ newTask.addEventListener('keypress', event => {
 
 // "responsividade" 0=gg 1=m 2=pp
 let widthViewport = 0;
-window.addEventListener('load', () => {
+;(() => {
     if (window.screen.width <= 550) {
         widthViewport = 2;
     } else if (window.screen.width <= 640) {
         widthViewport = 1;
     }
-});
+})();
