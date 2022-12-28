@@ -385,8 +385,8 @@ newTask.addEventListener('keypress', event => {
 let widthViewport = 0;
 window.addEventListener('load', () => {
     if (window.screen.width <= 550) {
-        widthViewport = 1;
-    } else if (window.screen.width <= 640) {
         widthViewport = 2;
+    } else if (window.screen.width <= 640) {
+        widthViewport = 1;
     }
 });
