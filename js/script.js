@@ -46,8 +46,8 @@ const changeHidden = btns => {
 
 const cancelEdition = () => {
     open = false;
-    elementEdit.contentEditable = false;
-    elementEdit.innerHTML = checkpoint;
+    contentEdit.contentEditable = false;
+    contentEdit.innerHTML = checkpoint;
     changeHidden(selectedDivBtns);
 };
 
@@ -62,9 +62,9 @@ const editNull = x => {
 
 const confirmEdition = () => {
     open = false;
-    if (!editNull(elementEdit.innerHTML)) {
-        selectTask().name = elementEdit.innerText;
-        elementEdit.contentEditable = false;
+    if (!editNull(contentEdit.innerHTML)) {
+        selectTask().name = contentEdit.innerText;
+        contentEdit.contentEditable = false;
         changeHidden(selectedDivBtns);
     }
 };
@@ -79,7 +79,7 @@ const optionsEdit = event => optionId[event.target.id]();
 const btnsEdit = btns => btns.addEventListener('click', optionsEdit); 
 
 let checkpoint = '';
-const createCheckpoint = () => checkpoint = elementEdit.innerHTML;
+const createCheckpoint = () => checkpoint = contentEdit.innerHTML;
 
 const keyEdit = div => {
     div.addEventListener('keypress', event => {
@@ -136,15 +136,15 @@ const verificationEdit = x => {
 
 // editar task
 let open = false;
-let elementEdit = '';
+let contentEdit = '';
 const edit = () => {
     open = true
     hiddenBtns(selectedDivBtns);
-    elementEdit = selectedDivTask;
-    elementEdit.contentEditable = true
-    elementEdit.focus();
+    contentEdit = selectedDivTask;
+    contentEdit.contentEditable = true
+    contentEdit.focus();
     createCheckpoint();
-    keyEdit(elementEdit);
+    keyEdit(contentEdit);
     openElements();
 };
 
@@ -369,7 +369,6 @@ newTask.addEventListener('keypress', event => {
         document.getElementById('createNewTask').click();
     }
 });
-
 
 // "responsividade" 0=gg 1=m 2=pp
 let widthViewport = 0;
