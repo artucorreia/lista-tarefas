@@ -285,6 +285,8 @@ const AbaPrime = () => {
 };
 
 const AbaCompleted = () => {
+    // caso tenha uma edição ativa, vai ser cancelada
+    optionId['cancelEdition']();
     sectionTasks.hidden = true;
     sectionTasksCompleteds.hidden = false;
     sectionTasksExcludeds.hidden = true;
@@ -292,6 +294,8 @@ const AbaCompleted = () => {
 };
 
 const AbaExcluded = () => {
+    // caso tenha uma edição ativa, vai ser cancelada
+    optionId['cancelEdition']();
     sectionTasks.hidden = true;
     sectionTasksCompleteds.hidden = true;
     sectionTasksExcludeds.hidden = false;
