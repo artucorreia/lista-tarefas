@@ -204,9 +204,8 @@ const clearInput = txt => txt.value = '';
 // cria id novos
 let aux = 0;
 const createId = () => {
-    const i = 'id';
     aux++;
-    return i + aux;
+    return 'id' + aux;
 };
 
 const responsive = (div, width) => {
