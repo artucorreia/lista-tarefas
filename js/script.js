@@ -26,7 +26,7 @@ const removeRow = () => sectionTasks.removeChild(selectedRow);
 // marcar como feita
 const check = () => {
     removeRow();
-    selectTask(selectedDivTask.innerHTML).status = true;
+    selectTask().status = true;
     let elements = secondaryElements(selectTask());
     sectionTasksCompleteds.appendChild(elements);
 };
@@ -46,11 +46,12 @@ const changeHidden = btns => {
 
 const cancelEdition = () => {
     open = false;
-    selectedDivTask.innerHTML = checkpoint;
+    elementEdit.contentEditable = false;
+    elementEdit.innerHTML = checkpoint;
     changeHidden(selectedDivBtns);
 };
 
-const inputnull = x => {
+const editNull = x => {
     if (x == '') {
         optionId['cancelEdition']();
         return true;
@@ -61,10 +62,9 @@ const inputnull = x => {
 
 const confirmEdition = () => {
     open = false;
-    const input = window.document.getElementById('newEdition');
-    if (!inputnull(input.value)) {
-        selectTask().name = input.value;
-        selectedDivTask.innerText = input.value;
+    if (!editNull(elementEdit.innerHTML)) {
+        selectTask().name = elementEdit.innerText;
+        elementEdit.contentEditable = false;
         changeHidden(selectedDivBtns);
     }
 };
@@ -78,27 +78,15 @@ const optionsEdit = event => optionId[event.target.id]();
 
 const btnsEdit = btns => btns.addEventListener('click', optionsEdit); 
 
-const clearTaskText = () => selectedDivTask.innerText = '';
-
 let checkpoint = '';
-const createCheckpoint = () => checkpoint = selectedDivTask.innerHTML;
+const createCheckpoint = () => checkpoint = elementEdit.innerHTML;
 
-const keyEdit = inp => {
-    inp.addEventListener('keypress', event => {
+const keyEdit = div => {
+    div.addEventListener('keypress', event => {
         if (event.key === 'Enter') {
             document.getElementById('confirmEdition').click();
         }
     });
-};
-
-const inputEdition = text => {
-    const input = window.document.createElement('input');
-    input.setAttribute('type', 'text');
-    input.setAttribute('id', 'newEdition');
-    input.setAttribute('value', text);
-    input.style.textAlign = 'center';
-    keyEdit(input);
-    return input;
 };
 
 const elementsEdit = () => {
@@ -147,14 +135,16 @@ const verificationEdit = x => {
 };
 
 // editar task
-let open = false
+let open = false;
+let elementEdit = '';
 const edit = () => {
     open = true
     hiddenBtns(selectedDivBtns);
+    elementEdit = selectedDivTask;
+    elementEdit.contentEditable = true
+    elementEdit.focus();
     createCheckpoint();
-    let elemento = inputEdition(selectTask().name);
-    clearTaskText();
-    selectedDivTask.appendChild(elemento);
+    keyEdit(elementEdit);
     openElements();
 };
 
