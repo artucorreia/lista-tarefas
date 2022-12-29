@@ -6,20 +6,17 @@ const secondaryElements = task => {
     return div;
 };
 
-// antigo
+// pegar a task
 let i = 0;
-const getTaskEdit = () => { 
-    let filter = tasks.filter((element, indice) => {
-        if(element.name == checkpointEdit) {
-            i = indice
-        }
-    })
-    return filter[0];
-};
-
 const getTask = () => { 
-    let filter = tasks.filter((element)=> {
-        if(element.name == divTask.innerHTML) {
+    let filter = [];
+    filter = tasks.filter((element, indice) => {
+        // se o botões estiverem escondido(está na edição)
+        // se está na edição e o nome do elemento é igual ao do checkpoint
+        // retorna o indice
+        if ((divButtons.hidden) && (element.name == checkpointEdit) ) {
+            i = indice
+        } else if(element.name == divTask.innerHTML) {            
             return element;
         }
     })
@@ -30,9 +27,7 @@ const removeRow = () => sectionTasks.removeChild(row);
 
 // marcar como feita
 const check = () => {
-    console.log(getTask())
     getTask().status = true;
-    console.log(getTask())
     removeRow();
     let elements = secondaryElements(getTask());
     sectionTasksCompleteds.appendChild(elements);
@@ -40,9 +35,7 @@ const check = () => {
 
 // excluir task
 const exclude = () => {
-    console.log(getTask());
     getTask().status = undefined;
-    console.log(getTask());
     removeRow();
     let elements = secondaryElements(getTask());
     sectionTasksExcludeds.appendChild(elements);
@@ -72,7 +65,7 @@ const editNull = text => {
 const confirmEdition = () => {
     editNull(divTask.innerText);
     if (!editNull(divTask.innerText)) {
-        getTaskEdit();
+        getTask();
         tasks[i].name = divTask.innerText.trim();
         divTask.innerText = divTask.innerText.trim();
         divTask.contentEditable = false;
@@ -234,7 +227,6 @@ const elementsPrime = task => {
     divGroupBtns.className = 'btn-group mr-2';
     divGroupBtns.ariaRoleDescription = 'group';
     divGroupBtns.id = id;
-    // console.log(divGroupBtns.id)
     const btnCheck = window.document.createElement('button');
     btnCheck.className = 'btn btn-secondary check';
     btnCheck.id = id;
@@ -349,7 +341,7 @@ createNewTask.addEventListener('click', () => {
     let newTaskTxt = window.document.getElementById('newTask');
     let newTaskName = newTaskTxt.value;
     if (newTaskName.trim() != '') {
-        const task = createTask(newTaskName); 
+        const task = createTask(newTaskName.trim()); 
         tasks.push(task);
         sectionTasks.appendChild(elementsPrime(task));
     } else {
