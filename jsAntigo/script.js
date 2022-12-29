@@ -8,12 +8,12 @@ const secondaryElements = task => {
 
 const selectTask = () => { 
     for (let i = 0; i < tasks.length; i++) {
-        if (divButtons.hidden) {
+        if (selectedDivBtns.hidden) {
             if(tasks[i].name == checkpoint) {
                 return tasks[i];
             }
         } else {
-            if(tasks[i].name == divTask.innerHTML) {
+            if(tasks[i].name == selectedDivTask.innerHTML) {
                 return tasks[i];
             }
 
@@ -21,7 +21,7 @@ const selectTask = () => {
     }
 };
 
-const removeRow = () => sectionTasks.removeChild(row);
+const removeRow = () => sectionTasks.removeChild(selectedRow);
 
 // marcar como feita
 const check = () => {
@@ -48,7 +48,7 @@ const cancelEdition = () => {
     open = false;
     contentEdit.contentEditable = false;
     contentEdit.innerHTML = checkpoint;
-    changeHidden(divButtons);
+    changeHidden(selectedDivBtns);
 };
 
 const editNull = x => {
@@ -63,12 +63,9 @@ const editNull = x => {
 const confirmEdition = () => {
     open = false;
     if (!editNull(contentEdit.innerHTML)) {
-        console.log(selectTask().name);
         selectTask().name = contentEdit.innerText;
-        console.log(selectTask().name);
-        console.log(contentEdit.innerText);
         contentEdit.contentEditable = false;
-        changeHidden(divButtons);
+        changeHidden(selectedDivBtns);
     }
 };
 
@@ -121,11 +118,11 @@ const elementsEdition = elementsEdit();
 let firstTime = true;
 let before = '';
 const openElements = () => {
-    if (firstTime || colBtns != before) {
-        colBtns.appendChild(elementsEdition);
+    if (firstTime || selectedColBtns != before) {
+        selectedColBtns.appendChild(elementsEdition);
     }
     elementsEdition.hidden = false;
-    before = colBtns; 
+    before = selectedColBtns; 
     firstTime = false;
 };
 
@@ -142,8 +139,8 @@ let open = false;
 let contentEdit = '';
 const edit = () => {
     open = true
-    hiddenBtns(divButtons);
-    contentEdit = divTask;
+    hiddenBtns(selectedDivBtns);
+    contentEdit = selectedDivTask;
     contentEdit.contentEditable = true
     contentEdit.focus();
     createCheckpoint();
@@ -162,48 +159,41 @@ const optionClass = {
 };
 
 // pega a div dos btns
-const getColBtns = btns => {
-    // let colBtns = ;
-    // console.log(colBtns);
-    return btns.parentElement;
+const selectDivBtns = taskId => {
+    let btns = window.document.getElementById('btns' + taskId);
+    return btns;
 };
 
-// const selectColBtns = btns => {
-//     let colBtns = window.document.getElementById('col' + taskId);
-//     return col;
-// };
+const selectColBtns = taskId => {
+    let col = window.document.getElementById('col' + taskId);
+    return col;
+};
 
 // pega a row da task
-const getRow = btns => {
-    // let row = ;
-    // console.log(row)
-    return btns.parentElement.parentElement;
+const selectRow = taskId => {
+    let row = window.document.getElementById('row' + taskId);
+    return row;
 };
 
 // pega a task que vai ser verificada, editada ou deletada
-const getDivTask = btns => {
-    // let task = 
-    // console.log(task)
-    return btns.parentElement.previousElementSibling.children[0];
+const selectDivTask = taskId => {
+    let task = window.document.getElementById('task' + taskId);
+    return task;
 };
 
 // identifica função que o usuário quer executar 
-// let idButtons = '';
-let divTask = '';
-let row = '';
-let divButtons = '';
-let colBtns = '';
+let taskId = '';
+let selectedDivTask = '';
+let selectedRow = '';
+let selectedDivBtns = '';
+let selectedColBtns = '';
 const options = event => {
-    // verificationEdit(open);
-    // idButtons = ;
-    // console.log(idButtons)
-    let buttons = window.document.getElementById(event.target.id);
-    row = getRow(buttons);
-    colBtns = getColBtns(buttons);
-    divTask = getDivTask(buttons);
-    divButtons = buttons;
-    // console.log(divButtons)
-    // divButtons = getDivButtons(buttons);
+    verificationEdit(open);
+    taskId = event.target.id;
+    selectedDivTask = selectDivTask(taskId);
+    selectedRow = selectRow(taskId);
+    selectedDivBtns = selectDivBtns(taskId);
+    selectedColBtns = selectColBtns(taskId);
     optionClass[event.target.className]();
 };
 
@@ -238,22 +228,20 @@ const elementsPrime = task => {
     // criando 
     const divRow = window.document.createElement('div'); 
     divRow.className = 'row';
-    // divRow.id = 'row' + id;
+    divRow.id = 'row' + id;
     const divColTask = window.document.createElement('div'); 
     divColTask.className = 'col-7';
     const divColBtns = window.document.createElement('div'); 
     divColBtns.className = 'col-3';
-    // divColBtns.id = 'col' + id;
+    divColBtns.id = 'col' + id;
     responsive(divColBtns, widthViewport);
     const divTask = window.document.createElement('div'); 
     divTask.className = 'task';
-    // divTask.id = 'task' + id;
+    divTask.id = 'task' + id;
     const divGroupBtns = window.document.createElement('div'); 
     divGroupBtns.className = 'btn-group mr-2';
     divGroupBtns.ariaRoleDescription = 'group';
-    // divGroupBtns.id = 'btns' + id;
-    divGroupBtns.id = id;
-    console.log(divGroupBtns.id)
+    divGroupBtns.id = 'btns' + id;
     const btnCheck = window.document.createElement('button');
     btnCheck.className = 'btn btn-secondary check';
     btnCheck.id = id;
