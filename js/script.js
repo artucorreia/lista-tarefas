@@ -161,62 +161,33 @@ const optionClass = {
     'btn btn-secondary edit':   () => edit()
 };
 
-// pega a div dos btns
-const getColBtns = btns => {
-    // let colBtns = ;
-    // console.log(colBtns);
-    return btns.parentElement;
-};
-
-// const selectColBtns = btns => {
-//     let colBtns = window.document.getElementById('col' + taskId);
-//     return col;
-// };
+// pega a col dos btns
+const getColBtns = btns => btns.parentElement;
 
 // pega a row da task
-const getRow = btns => {
-    // let row = ;
-    // console.log(row)
-    return btns.parentElement.parentElement;
-};
+const getRow = btns => btns.parentElement.parentElement;
 
-// pega a task que vai ser verificada, editada ou deletada
-const getDivTask = btns => {
-    // let task = 
-    // console.log(task)
-    return btns.parentElement.previousElementSibling.children[0];
-};
+// pega a div da task
+const getDivTask = btns => btns.parentElement.previousElementSibling.children[0];
 
-// identifica função que o usuário quer executar 
-// let idButtons = '';
-let divTask = '';
+// pega os elementos HTML
 let row = '';
-let divButtons = '';
 let colBtns = '';
+let divTask = '';
+let divButtons = '';
 const options = event => {
     // verificationEdit(open);
-    // idButtons = ;
-    // console.log(idButtons)
     let buttons = window.document.getElementById(event.target.id);
     row = getRow(buttons);
     colBtns = getColBtns(buttons);
     divTask = getDivTask(buttons);
     divButtons = buttons;
-    // console.log(divButtons)
-    // divButtons = getDivButtons(buttons);
     optionClass[event.target.className]();
 };
 
 const buttons = btns => btns.addEventListener('click', options);
 
 const clearInput = txt => txt.value = '';
-
-// cria id novos
-let aux = 0;
-const createId = () => {
-    aux++;
-    return 'id' + aux;
-};
 
 const responsive = (div, width) => {
     switch (width) {
@@ -232,26 +203,29 @@ const responsive = (div, width) => {
     }
 };
 
+// cria id novos
+let aux = 0;
+const createId = () => {
+    aux++;
+    return 'id' + aux;
+};
+
 let id = '';
 const elementsPrime = task => {
     id = createId();
     // criando 
     const divRow = window.document.createElement('div'); 
     divRow.className = 'row';
-    // divRow.id = 'row' + id;
     const divColTask = window.document.createElement('div'); 
     divColTask.className = 'col-7';
     const divColBtns = window.document.createElement('div'); 
     divColBtns.className = 'col-3';
-    // divColBtns.id = 'col' + id;
     responsive(divColBtns, widthViewport);
     const divTask = window.document.createElement('div'); 
     divTask.className = 'task';
-    // divTask.id = 'task' + id;
     const divGroupBtns = window.document.createElement('div'); 
     divGroupBtns.className = 'btn-group mr-2';
     divGroupBtns.ariaRoleDescription = 'group';
-    // divGroupBtns.id = 'btns' + id;
     divGroupBtns.id = id;
     console.log(divGroupBtns.id)
     const btnCheck = window.document.createElement('button');
