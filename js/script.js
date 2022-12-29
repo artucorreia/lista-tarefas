@@ -1,41 +1,53 @@
 // cria os elementos que vão conter as tasks completas ou deletadas
 const secondaryElements = task => {
-    const divTask = window.document.createElement('div');
-    divTask.className = 'div-secondary';
-    divTask.innerHTML = task.name;
-    return divTask;
+    const div = window.document.createElement('div');
+    div.className = 'div-secondary';
+    div.innerHTML = task.name;
+    return div;
 };
 
-const selectTask = () => { 
-    for (let i = 0; i < tasks.length; i++) {
-        if (divButtons.hidden) {
-            if(tasks[i].name == checkpoint) {
-                return tasks[i];
-            }
-        } else {
-            if(tasks[i].name == divTask.innerHTML) {
-                return tasks[i];
-            }
+// antigo
+// const selectTask = () => { 
+//     for (let i = 0; i < tasks.length; i++) {
+//         if (divButtons.hidden) {
+//             console.log(tasks.name)
+//             if(tasks[i].name == checkpoint) {
+//                 return tasks[i];
+//             }
+//         } else {
+//             if(tasks[i].name == divTask.innerHTML) {
+//                 return tasks[i];
+//             }
+//         }
+//     }
+// };
 
+const getTask = () => { 
+    let filter = tasks.filter((element)=> {
+        if(element.name == divTask.innerHTML) {
+            return element;
         }
-    }
+    })
+    return filter[0];
 };
 
 const removeRow = () => sectionTasks.removeChild(row);
 
 // marcar como feita
 const check = () => {
+    getTask().status = true;
     removeRow();
-    selectTask().status = true;
-    let elements = secondaryElements(selectTask());
+    console.log(getTask())
+    let elements = secondaryElements(getTask());
     sectionTasksCompleteds.appendChild(elements);
 };
 
 // excluir task
 const exclude = () => {
+    getTask().status = null;
     removeRow();
-    selectTask().status = null;
-    let elements = secondaryElements(selectTask());
+    console.log(getTask());
+    let elements = secondaryElements(getTask());
     sectionTasksExcludeds.appendChild(elements);
 };
 
@@ -330,8 +342,8 @@ navbar.addEventListener('click', event => {
 let tasks = [];
 const createTask = name => {
     return {
-        'name': name,
-        'status': false
+        name: name,
+        status: false
     }
 };
 
