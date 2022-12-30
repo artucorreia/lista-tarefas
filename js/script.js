@@ -35,7 +35,7 @@ const check = () => {
 
 // excluir task
 const exclude = () => {
-    getTask().status = undefined;
+    getTask().status = null;
     removeRow();
     let elements = secondaryElements(getTask());
     sectionTasksExcludeds.appendChild(elements);
@@ -263,6 +263,8 @@ const elementsPrime = task => {
 
 // configurações da navbar
 const AbaPrime = () => {
+    // caso tenha uma edição ativa, vai ser cancelada
+    optionId['cancelEdition']();
     sectionTasks.hidden = false;
     sectionTasksCompleteds.hidden = true;
     sectionTasksExcludeds.hidden = true;
