@@ -366,5 +366,5 @@ let widthViewport = 0;
 
 // localStorage
 ;(() => {
-
+    console.log('ta ok');
 })();
