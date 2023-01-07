@@ -31,6 +31,7 @@ const check = () => {
     removeRow();
     let elements = secondaryElements(getTask());
     sectionTasksCompleteds.appendChild(elements);
+    AbaPrime();
 };
 
 // excluir task
@@ -39,6 +40,7 @@ const exclude = () => {
     removeRow();
     let elements = secondaryElements(getTask());
     sectionTasksExcludeds.appendChild(elements);
+    AbaPrime();
 };
 
 const changeHidden = btns => {
@@ -175,6 +177,7 @@ let colBtns = '';
 let divTask = '';
 let divButtons = '';
 const options = event => {
+    console.log(event.target.id)
     verificationEdit(editActive);
     let buttons = window.document.getElementById(event.target.id);
     row = getRow(buttons);
@@ -288,6 +291,28 @@ const optionsNavbar = {
     'excluded':  () => AbaExcluded()
 };
 
+// localStorage.clear()
+// remove as tasks com status undefined
+// remove tanto a da aba que é pra ser apagada, como da outra, ajeitar dps
+const filterUndefined = () => {
+    let filter = []; 
+    filter = tasks.filter((element) => {
+        if (element.status != undefined) {
+            return element;
+        }
+    })
+    console.log(filter);
+};
+
+// muda o status da tarefa para undefined
+const statusUndefined = trueOrNull => {
+    tasks.map((element) => {
+        if (element.status == trueOrNull) {
+            element.status = undefined;
+        }
+    })
+};
+
 // botão limpar tudo
 const btnClearAll = window.document.getElementById('clearAll');
 btnClearAll.addEventListener('click', () => {
@@ -295,10 +320,13 @@ btnClearAll.addEventListener('click', () => {
     if (confirm) {
         if (!sectionTasksCompleteds.hidden) {
             sectionTasksCompleteds.innerHTML = '';
+            statusUndefined(true);
         } else {
             sectionTasksExcludeds.innerHTML = '';
+            statusUndefined(null);
         }
     }
+    filterUndefined();
 });
 btnClearAll.hidden = true;
 
@@ -320,6 +348,10 @@ navbar.addEventListener('click', event => {
     }
 });
 
+const addInLocalStorage = () => {
+    localStorage.tasks = JSON.stringify(tasks);
+};
+
 // nova task
 let tasks = [];
 const createTask = name => {
@@ -332,6 +364,7 @@ const createTask = name => {
 const sectionTasks = window.document.getElementById('tasks');
 const createNewTask = window.document.getElementById('createNewTask');
 createNewTask.addEventListener('click', () => {
+    console.log(tasks)
     AbaPrime();
     verificationEdit(editActive);
     let newTaskTxt = window.document.getElementById('newTask');
@@ -340,6 +373,7 @@ createNewTask.addEventListener('click', () => {
         const task = createTask(newTaskName.trim()); 
         tasks.push(task);
         sectionTasks.appendChild(elementsPrime(task));
+        addInLocalStorage();
     } else {
         alert('Adicione uma tarefa');
     }
@@ -364,7 +398,19 @@ let widthViewport = 0;
     }
 })();
 
-// localStorage
+// exibindo localStorage
 ;(() => {
-    console.log('ta ok');
+    if (localStorage.tasks != '' && localStorage.tasks != null){
+        tasks = JSON.parse(localStorage.tasks);
+        tasks.map((element) => {
+            sectionTasks.appendChild(elementsPrime(element));
+        }) 
+    }
+})();
+
+// setando localStorage
+;(() => {
+    if (localStorage.tasks == null) {
+        localStorage.setItem('tasks', '');
+    }
 })();
