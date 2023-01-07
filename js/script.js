@@ -64,10 +64,13 @@ const editNull = text => {
 
 const confirmEdition = () => {
     editNull(divTask.innerText);
+    console.log(divTask.innerText)
     if (!editNull(divTask.innerText)) {
         getTask();
         tasks[i].name = divTask.innerText.trim();
-        divTask.innerText = divTask.innerText.trim();
+        console.log(i)
+        console.log(tasks[i].name)
+        // divTask.innerHTML = divTask.innerText.trim();
         divTask.contentEditable = false;
         changeHidden(divButtons);
     }
@@ -263,8 +266,6 @@ const elementsPrime = task => {
 
 // configurações da navbar
 const AbaPrime = () => {
-    // caso tenha uma edição ativa, vai ser cancelada
-    optionId['cancelEdition']();
     sectionTasks.hidden = false;
     sectionTasksCompleteds.hidden = true;
     sectionTasksExcludeds.hidden = true;
@@ -272,8 +273,6 @@ const AbaPrime = () => {
 };
 
 const AbaCompleted = () => {
-    // caso tenha uma edição ativa, vai ser cancelada
-    optionId['cancelEdition']();
     sectionTasks.hidden = true;
     sectionTasksCompleteds.hidden = false;
     sectionTasksExcludeds.hidden = true;
@@ -281,8 +280,6 @@ const AbaCompleted = () => {
 };
 
 const AbaExcluded = () => {
-    // caso tenha uma edição ativa, vai ser cancelada
-    optionId['cancelEdition']();
     sectionTasks.hidden = true;
     sectionTasksCompleteds.hidden = true;
     sectionTasksExcludeds.hidden = false;
@@ -340,6 +337,7 @@ const sectionTasks = window.document.getElementById('tasks');
 const createNewTask = window.document.getElementById('createNewTask');
 createNewTask.addEventListener('click', () => {
     AbaPrime();
+    verificationEdit(editActive);
     let newTaskTxt = window.document.getElementById('newTask');
     let newTaskName = newTaskTxt.value;
     if (newTaskName.trim() != '') {
