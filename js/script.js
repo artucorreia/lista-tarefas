@@ -64,13 +64,9 @@ const editNull = text => {
 
 const confirmEdition = () => {
     editNull(divTask.innerText);
-    console.log(divTask.innerText)
     if (!editNull(divTask.innerText)) {
         getTask();
         tasks[i].name = divTask.innerText.trim();
-        console.log(i)
-        console.log(tasks[i].name)
-        // divTask.innerHTML = divTask.innerText.trim();
         divTask.contentEditable = false;
         changeHidden(divButtons);
     }
@@ -366,4 +362,9 @@ let widthViewport = 0;
     } else if (window.screen.width <= 640) {
         widthViewport = 1;
     }
+})();
+
+// localStorage
+;(() => {
+
 })();
