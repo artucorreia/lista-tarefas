@@ -1,3 +1,6 @@
+// atualiza o localStorage
+const updateLocalStorage = () => localStorage.tasks = JSON.stringify(tasks);
+
 // cria os elementos que vão conter as tasks completas ou deletadas
 const secondaryElements = task => {
     const div = window.document.createElement('div');
@@ -31,7 +34,8 @@ const check = () => {
     removeRow();
     let elements = secondaryElements(getTask());
     sectionTasksCompleteds.appendChild(elements);
-    AbaPrime();
+    updateLocalStorage();
+    abaPrime();
 };
 
 // excluir task
@@ -40,7 +44,8 @@ const exclude = () => {
     removeRow();
     let elements = secondaryElements(getTask());
     sectionTasksExcludeds.appendChild(elements);
-    AbaPrime();
+    updateLocalStorage();
+    abaPrime();
 };
 
 const changeHidden = btns => {
@@ -65,12 +70,12 @@ const editNull = text => {
 };
 
 const confirmEdition = () => {
-    editNull(divTask.innerText);
     if (!editNull(divTask.innerText)) {
         getTask();
         tasks[i].name = divTask.innerText.trim();
         divTask.contentEditable = false;
         changeHidden(divButtons);
+        updateLocalStorage();
     }
     editActive = false;
 };
@@ -177,7 +182,6 @@ let colBtns = '';
 let divTask = '';
 let divButtons = '';
 const options = event => {
-    console.log(event.target.id)
     verificationEdit(editActive);
     let buttons = window.document.getElementById(event.target.id);
     row = getRow(buttons);
@@ -264,21 +268,21 @@ const elementsPrime = task => {
 };
 
 // configurações da navbar
-const AbaPrime = () => {
+const abaPrime = () => {
     sectionTasks.hidden = false;
     sectionTasksCompleteds.hidden = true;
     sectionTasksExcludeds.hidden = true;
     btnClearAll.hidden = true;
 };
 
-const AbaCompleted = () => {
+const abaCompleted = () => {
     sectionTasks.hidden = true;
     sectionTasksCompleteds.hidden = false;
     sectionTasksExcludeds.hidden = true;
     btnClearAll.hidden = false;
 };
 
-const AbaExcluded = () => {
+const abaExcluded = () => {
     sectionTasks.hidden = true;
     sectionTasksCompleteds.hidden = true;
     sectionTasksExcludeds.hidden = false;
@@ -286,22 +290,19 @@ const AbaExcluded = () => {
 };
 
 const optionsNavbar = {
-    'prime':     () => AbaPrime(),
-    'completed': () => AbaCompleted(),
-    'excluded':  () => AbaExcluded()
+    'prime':     () => abaPrime(),
+    'completed': () => abaCompleted(),
+    'excluded':  () => abaExcluded()
 };
 
-// localStorage.clear()
 // remove as tasks com status undefined
-// remove tanto a da aba que é pra ser apagada, como da outra, ajeitar dps
 const filterUndefined = () => {
-    let filter = []; 
-    filter = tasks.filter((element) => {
-        if (element.status != undefined) {
+    tasks = tasks.filter((element) => {
+        if (element.status !== undefined) {
             return element;
         }
     })
-    console.log(filter);
+    updateLocalStorage();
 };
 
 // muda o status da tarefa para undefined
@@ -332,7 +333,7 @@ btnClearAll.hidden = true;
 
 // abas navbar
 const title = window.document.getElementById('title');
-title.addEventListener('click', AbaPrime);
+title.addEventListener('click', abaPrime);
 
 const sectionTasksCompleteds = window.document.getElementById('tasksCompleteds');
 const sectionTasksExcludeds = window.document.getElementById('tasksExcludeds');
@@ -364,8 +365,7 @@ const createTask = name => {
 const sectionTasks = window.document.getElementById('tasks');
 const createNewTask = window.document.getElementById('createNewTask');
 createNewTask.addEventListener('click', () => {
-    console.log(tasks)
-    AbaPrime();
+    abaPrime();
     verificationEdit(editActive);
     let newTaskTxt = window.document.getElementById('newTask');
     let newTaskName = newTaskTxt.value;
@@ -399,13 +399,24 @@ let widthViewport = 0;
 })();
 
 // exibindo localStorage
+// tem que melhorar isso aq
+// mt coisa escrita, vou colocar em um objeto talvez
 ;(() => {
     if (localStorage.tasks != '' && localStorage.tasks != null){
         tasks = JSON.parse(localStorage.tasks);
         tasks.map((element) => {
-            sectionTasks.appendChild(elementsPrime(element));
-        }) 
+            if (element.status == false) {
+                sectionTasks.appendChild(elementsPrime(element));
+            } else if (element.status == true) {
+                let elementsHTML = secondaryElements(element);
+                sectionTasksCompleteds.appendChild(elementsHTML);
+            } else {
+                let elementsHTML = secondaryElements(element);
+                sectionTasksExcludeds.appendChild(elementsHTML);
+            }
+        })
     }
+    abaPrime();
 })();
 
 // setando localStorage
