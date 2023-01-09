@@ -17,9 +17,9 @@ const getTask = () => {
         // se o botões estiverem escondido(está na edição)
         // se está na edição e o nome do elemento é igual ao do checkpoint
         // retorna o indice
-        if ((divButtons.hidden) && (element.name == checkpointEdit) ) {
+        if ((divButtons.hidden) && (element.name == checkpointEdit)) {
             i = indice
-        } else if(element.name == divTask.innerHTML) {            
+        } else if((element.name == divTask.innerHTML) && (element.status == false)) {     
             return element;
         }
     })
@@ -30,9 +30,10 @@ const removeRow = () => sectionTasks.removeChild(row);
 
 // marcar como feita
 const check = () => {
-    getTask().status = true;
+    let task = getTask();
+    task.status = true;
     removeRow();
-    let elements = secondaryElements(getTask());
+    let elements = secondaryElements(task);
     sectionTasksCompleteds.appendChild(elements);
     updateLocalStorage();
     abaPrime();
@@ -40,9 +41,10 @@ const check = () => {
 
 // excluir task
 const exclude = () => {
-    getTask().status = null;
+    let task = getTask();
+    task.status = null;
     removeRow();
-    let elements = secondaryElements(getTask());
+    let elements = secondaryElements(task);
     sectionTasksExcludeds.appendChild(elements);
     updateLocalStorage();
     abaPrime();
