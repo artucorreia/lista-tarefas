@@ -400,23 +400,17 @@ let widthViewport = 0;
     }
 })();
 
+const optionsLocalStorage = {
+    'false': (e) => sectionTasks.appendChild(elementsPrime(e)),
+    'true':  (e) => sectionTasksCompleteds.appendChild(secondaryElements(e)),
+    'null':  (e) => sectionTasksExcludeds.appendChild(secondaryElements(e))
+};
+
 // exibindo localStorage
-// tem que melhorar isso aq
-// mt coisa escrita, vou colocar em um objeto talvez
 ;(() => {
     if (localStorage.tasks != '' && localStorage.tasks != null){
         tasks = JSON.parse(localStorage.tasks);
-        tasks.map((element) => {
-            if (element.status == false) {
-                sectionTasks.appendChild(elementsPrime(element));
-            } else if (element.status == true) {
-                let elementsHTML = secondaryElements(element);
-                sectionTasksCompleteds.appendChild(elementsHTML);
-            } else {
-                let elementsHTML = secondaryElements(element);
-                sectionTasksExcludeds.appendChild(elementsHTML);
-            }
-        })
+        tasks.map( (element) => optionsLocalStorage[element.status](element) );
     }
     abaPrime();
 })();
