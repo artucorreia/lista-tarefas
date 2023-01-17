@@ -160,13 +160,10 @@ const edit = () => {
 };
 
 // direciona para check, edit ou exclude
-const optionClass = {
-    'fas fa-check':  () => check(),
-    'fas fa-trash':  () => exclude(),
-    'fas fa-pencil': () => edit(),
-    'btn btn-secondary check':  () => check(),
-    'btn btn-secondary delete': () => exclude(),
-    'btn btn-secondary edit':   () => edit()
+const optionName = {
+    'check':  () => check(),
+    'edit':   () => edit(),
+    'delete': () => exclude()
 };
 
 // pega a col dos btns
@@ -190,7 +187,7 @@ const options = event => {
     colBtns = getColBtns(buttons);
     divTask = getDivTask(buttons);
     divButtons = buttons;
-    optionClass[event.target.className]();
+    optionName[event.target.dataset.name]();
 };
 
 const buttons = btns => btns.addEventListener('click', options);
@@ -236,22 +233,28 @@ const elementsPrime = task => {
     divGroupBtns.ariaRoleDescription = 'group';
     divGroupBtns.id = id;
     const btnCheck = window.document.createElement('button');
-    btnCheck.className = 'btn btn-secondary check';
+    btnCheck.className = 'btn btn-secondary';
+    btnCheck.setAttribute('data-name', 'check');
     btnCheck.id = id;
     const btnEdit = window.document.createElement('button');
-    btnEdit.className = 'btn btn-secondary edit';
+    btnEdit.className = 'btn btn-secondary';
+    btnEdit.setAttribute('data-name', 'edit');
     btnEdit. id = id;
     const btnDelete = window.document.createElement('button');
-    btnDelete.className = 'btn btn-secondary delete';
+    btnDelete.className = 'btn btn-secondary';
+    btnDelete.setAttribute('data-name', 'delete');
     btnDelete.id = id;
     const iconCheck = window.document.createElement('i');
     iconCheck.className = 'fas fa-check';
+    iconCheck.setAttribute('data-name', 'check');
     iconCheck.id = id;
     const iconEdit = window.document.createElement('i');
     iconEdit.className = 'fas fa-pencil';
+    iconEdit.setAttribute('data-name', 'edit');
     iconEdit.id = id;
     const iconDelete = window.document.createElement('i');
     iconDelete.className = 'fas fa-trash';
+    iconDelete.setAttribute('data-name', 'delete');
     iconDelete.id = id;
     // organizando
     divRow.appendChild(divColTask);
