@@ -64,7 +64,7 @@ const cancelEdition = () => {
 
 const editNull = text => {
     if (text.trim() == '') {
-        optionId['cancelEdition']();
+        editOptions['cancelEdition']();
         return true;
     } else {
         return false;
@@ -75,6 +75,7 @@ const confirmEdition = () => {
     if (!editNull(divTask.innerText)) {
         getTask();
         tasks[i].name = divTask.innerText.trim();
+        divTask.innerHTML = divTask.innerText.trim();
         divTask.contentEditable = false;
         changeHidden(divButtons);
         updateLocalStorage();
@@ -82,19 +83,19 @@ const confirmEdition = () => {
     editActive = false;
 };
 
-const optionId = {
+const editOptions = {
     'confirmEdition': () => confirmEdition(),
     'cancelEdition':  () => cancelEdition() 
 };
 
-const optionsEdit = event => optionId[event.target.id](); 
+const optionsEdit = event => editOptions[event.target.dataset.name](); 
 
 const btnsEdit = btns => btns.addEventListener('click', optionsEdit); 
 
 const keyEdit = div => {
     div.addEventListener('keypress', event => {
         if (event.key === 'Enter') {
-            document.getElementById('confirmEdition').click();
+            document.getElementById('btnsEdit').firstChild.click();
         }
     });
 };
@@ -106,16 +107,16 @@ const elementsEdit = () => {
     btns.ariaRoleDescription = 'group';
     const btnConfirm = window.document.createElement('button'); 
     btnConfirm.className = 'btn btn-secondary';
-    btnConfirm.id = 'confirmEdition';
+    btnConfirm.setAttribute('data-name', 'confirmEdition');
     const btnCancel = window.document.createElement('button');
     btnCancel.className = 'btn btn-secondary';
-    btnCancel.id = 'cancelEdition';
+    btnCancel.setAttribute('data-name', 'cancelEdition');
     const iconConfirm = window.document.createElement('i');
     iconConfirm.className = 'fas fa-check';
-    iconConfirm.id = 'confirmEdition';
+    iconConfirm.setAttribute('data-name', 'confirmEdition');
     const iconCancel = window.document.createElement('i');
     iconCancel.className = 'fas fa-xmark fa-marge';
-    iconCancel.id = 'cancelEdition';
+    iconCancel.setAttribute('data-name', 'cancelEdition');
     btnConfirm.appendChild(iconConfirm);
     btnCancel.appendChild(iconCancel);
     btns.appendChild(btnConfirm);
@@ -138,7 +139,7 @@ const openElements = () => {
 
 const verificationEdit = active => {
     if (active) {
-        return optionId['cancelEdition']();
+        return editOptions['cancelEdition']();
     }
 };
 
@@ -160,7 +161,7 @@ const edit = () => {
 };
 
 // direciona para check, edit ou exclude
-const optionName = {
+const mainOptions = {
     'check':  () => check(),
     'edit':   () => edit(),
     'delete': () => exclude()
@@ -173,24 +174,22 @@ const getColBtns = btns => btns.parentElement;
 const getRow = btns => btns.parentElement.parentElement;
 
 // pega a div da task
-const getDivTask = btns => btns.parentElement.previousElementSibling.children[0];
+const getDivTask = btns => btns.parentElement.previousElementSibling.firstElementChild;
 
 // pega os elementos HTML
 let row = '';
 let colBtns = '';
 let divTask = '';
 let divButtons = '';
-const options = event => {
+const buttons = btns => btns.addEventListener('click', event => {
     verificationEdit(editActive);
-    let buttons = window.document.getElementById(event.target.id);
-    row = getRow(buttons);
-    colBtns = getColBtns(buttons);
-    divTask = getDivTask(buttons);
-    divButtons = buttons;
-    optionName[event.target.dataset.name]();
-};
-
-const buttons = btns => btns.addEventListener('click', options);
+    divButtons = window.document.getElementById(event.target.id);
+    colBtns = getColBtns(divButtons);
+    divTask = getDivTask(divButtons);
+    row = getRow(divButtons);
+    console.log(divButtons)
+    mainOptions[event.target.dataset.name]();
+});
 
 const clearInput = txt => txt.value = '';
 
