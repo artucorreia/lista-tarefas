@@ -1,13 +1,7 @@
+import elementsHTML from "./elements.js";
+
 // atualiza o localStorage
 const updateLocalStorage = () => localStorage.tasks = JSON.stringify(tasks);
-
-// cria os elementos que vão conter as tasks completas ou deletadas
-const secondaryElements = task => {
-    const div = window.document.createElement('div');
-    div.className = 'div-secondary';
-    div.innerHTML = task.name;
-    return div;
-};
 
 // pegar a task
 let i = 0;
@@ -33,7 +27,7 @@ const check = () => {
     let task = getTask();
     task.status = true;
     removeRow();
-    let elements = secondaryElements(task);
+    let elements = elementsHTML['secondary'](task);
     sectionTasksCompleteds.appendChild(elements);
     updateLocalStorage();
     abaPrime();
@@ -44,7 +38,7 @@ const exclude = () => {
     let task = getTask();
     task.status = null;
     removeRow();
-    let elements = secondaryElements(task);
+    let elements = elementsHTML['secondary'](task);
     sectionTasksExcludeds.appendChild(elements);
     updateLocalStorage();
     abaPrime();
@@ -100,35 +94,11 @@ const keyEdit = div => {
     });
 };
 
-const elementsEdit = () => {
-    const btns = window.document.createElement('div'); 
-    btns.className = 'btn-group';
-    btns.id = 'btnsEdit';
-    btns.ariaRoleDescription = 'group';
-    const btnConfirm = window.document.createElement('button'); 
-    btnConfirm.className = 'btn btn-secondary';
-    btnConfirm.setAttribute('data-name', 'confirmEdition');
-    const btnCancel = window.document.createElement('button');
-    btnCancel.className = 'btn btn-secondary';
-    btnCancel.setAttribute('data-name', 'cancelEdition');
-    const iconConfirm = window.document.createElement('i');
-    iconConfirm.className = 'fas fa-check';
-    iconConfirm.setAttribute('data-name', 'confirmEdition');
-    const iconCancel = window.document.createElement('i');
-    iconCancel.className = 'fas fa-xmark fa-marge';
-    iconCancel.setAttribute('data-name', 'cancelEdition');
-    btnConfirm.appendChild(iconConfirm);
-    btnCancel.appendChild(iconCancel);
-    btns.appendChild(btnConfirm);
-    btns.appendChild(btnCancel);
-    btnsEdit(btns);
-    return btns;
-};
-
-const elementsEdition = elementsEdit();
+const elementsEdition = elementsHTML['edit']();
 let firstTime = true;
 let before = '';
 const openElements = () => {
+    btnsEdit(elementsEdition);
     if (firstTime || colBtns != before) {
         colBtns.appendChild(elementsEdition);
     }
@@ -403,8 +373,8 @@ let widthViewport = 0;
 
 const optionsLocalStorage = {
     'false': (e) => sectionTasks.appendChild(elementsPrime(e)),
-    'true':  (e) => sectionTasksCompleteds.appendChild(secondaryElements(e)),
-    'null':  (e) => sectionTasksExcludeds.appendChild(secondaryElements(e))
+    'true':  (e) => sectionTasksCompleteds.appendChild(elementsHTML['secondary'](e)),
+    'null':  (e) => sectionTasksExcludeds.appendChild(elementsHTML['secondary'](e))
 };
 
 // exibindo localStorage
