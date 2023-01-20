@@ -152,13 +152,12 @@ let colBtns = '';
 let divTask = '';
 let divButtons = '';
 const buttons = btns => btns.addEventListener('click', event => {
-    console.log(btns)
-    // console.log(btns.parentElement)
     verificationEdit(editActive);
-    divButtons = window.document.getElementById(event.target.id);
-    colBtns = getColBtns(divButtons);
-    divTask = getDivTask(divButtons);
-    row = getRow(divButtons);
+    divButtons = btns;
+    console.log(btns)
+    colBtns = getColBtns(btns);
+    divTask = getDivTask(btns);
+    row = getRow(btns);
     mainOptions[event.target.dataset.name]();
 });
 
@@ -186,16 +185,7 @@ const responsive = (div, width) => {
     }
 };
 
-// cria id novos
-let auxId = 0;
-const createId = () => {
-    auxId++;
-    return 'id' + auxId;
-};
-
-let id = '';
 const elementsPrime = task => {
-    id = createId();
     // criando 
     const divRow = window.document.createElement('div'); 
     divRow.className = 'row';
@@ -209,31 +199,24 @@ const elementsPrime = task => {
     const divGroupBtns = window.document.createElement('div'); 
     divGroupBtns.className = 'btn-group mr-2';
     divGroupBtns.ariaRoleDescription = 'group';
-    divGroupBtns.id = id;
     const btnCheck = window.document.createElement('button');
     btnCheck.className = 'btn btn-secondary';
     btnCheck.setAttribute('data-name', 'check');
-    btnCheck.id = id;
     const btnEdit = window.document.createElement('button');
     btnEdit.className = 'btn btn-secondary';
     btnEdit.setAttribute('data-name', 'edit');
-    btnEdit. id = id;
     const btnDelete = window.document.createElement('button');
     btnDelete.className = 'btn btn-secondary';
     btnDelete.setAttribute('data-name', 'delete');
-    btnDelete.id = id;
     const iconCheck = window.document.createElement('i');
     iconCheck.className = 'fas fa-check';
     iconCheck.setAttribute('data-name', 'check');
-    iconCheck.id = id;
     const iconEdit = window.document.createElement('i');
     iconEdit.className = 'fas fa-pencil';
     iconEdit.setAttribute('data-name', 'edit');
-    iconEdit.id = id;
     const iconDelete = window.document.createElement('i');
     iconDelete.className = 'fas fa-trash';
     iconDelete.setAttribute('data-name', 'delete');
-    iconDelete.id = id;
     // organizando
     divRow.appendChild(divColTask);
     divColTask.appendChild(divTask);
@@ -246,7 +229,6 @@ const elementsPrime = task => {
     btnEdit.appendChild(iconEdit); 
     divGroupBtns.appendChild(btnDelete);
     btnDelete.appendChild(iconDelete);
-    // buttons(divGroupBtns);
     return divRow;
 };
 
