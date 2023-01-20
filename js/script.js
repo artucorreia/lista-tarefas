@@ -1,4 +1,4 @@
-import elementsHTML from "./elements.js";
+import elementsHTML from "./elementsHTML.js";
 
 // atualiza o localStorage
 const updateLocalStorage = () => localStorage.tasks = JSON.stringify(tasks);
