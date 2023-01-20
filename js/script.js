@@ -152,6 +152,8 @@ let colBtns = '';
 let divTask = '';
 let divButtons = '';
 const buttons = btns => btns.addEventListener('click', event => {
+    console.log(btns)
+    // console.log(btns.parentElement)
     verificationEdit(editActive);
     divButtons = window.document.getElementById(event.target.id);
     colBtns = getColBtns(divButtons);
@@ -159,6 +161,14 @@ const buttons = btns => btns.addEventListener('click', event => {
     row = getRow(divButtons);
     mainOptions[event.target.dataset.name]();
 });
+
+// seta o event listener para o group buttons
+// sempre que é gerado
+const buttonsEventListener = statusTask => {
+    if (statusTask == false) {
+        buttons(sectionTasks.lastElementChild.lastElementChild.firstElementChild);
+    }
+};
 
 const clearInput = txt => txt.value = '';
 
@@ -236,7 +246,7 @@ const elementsPrime = task => {
     btnEdit.appendChild(iconEdit); 
     divGroupBtns.appendChild(btnDelete);
     btnDelete.appendChild(iconDelete);
-    buttons(divGroupBtns);
+    // buttons(divGroupBtns);
     return divRow;
 };
 
@@ -343,6 +353,7 @@ createNewTask.addEventListener('click', () => {
         const task = createTask(newTaskName.trim()); 
         tasks.push(task);
         sectionTasks.appendChild(elementsPrime(task));
+        buttonsEventListener(false);
         addInLocalStorage();
     } else {
         alert('Adicione uma tarefa');
@@ -378,7 +389,10 @@ const optionsLocalStorage = {
 ;(() => {
     if (localStorage.tasks != '' && localStorage.tasks != null){
         tasks = JSON.parse(localStorage.tasks);
-        tasks.map( (element) => optionsLocalStorage[element.status](element) );
+        tasks.map((element) => {
+            optionsLocalStorage[element.status](element);
+            buttonsEventListener(element.status);
+        });
     }
     abaPrime();
 })();
