@@ -171,66 +171,9 @@ const buttonsEventListener = statusTask => {
 
 const clearInput = txt => txt.value = '';
 
-const responsive = (div, width) => {
-    switch (width) {
-        case 0:
-            div.style.textAlign = 'justify';
-            break;
-        case 1:
-            div.style.textAlign = 'center';
-            break;
-        case 2:
-            div.style.textAlign = 'right';
-            break;
-    }
-};
+// aq jaz, responsive
 
-const elementsPrime = task => {
-    // criando 
-    const divRow = window.document.createElement('div'); 
-    divRow.className = 'row';
-    const divColTask = window.document.createElement('div'); 
-    divColTask.className = 'col-7';
-    const divColBtns = window.document.createElement('div'); 
-    divColBtns.className = 'col-3';
-    responsive(divColBtns, widthViewport);
-    const divTask = window.document.createElement('div'); 
-    divTask.className = 'task';
-    const divGroupBtns = window.document.createElement('div'); 
-    divGroupBtns.className = 'btn-group mr-2';
-    divGroupBtns.ariaRoleDescription = 'group';
-    const btnCheck = window.document.createElement('button');
-    btnCheck.className = 'btn btn-secondary';
-    btnCheck.setAttribute('data-name', 'check');
-    const btnEdit = window.document.createElement('button');
-    btnEdit.className = 'btn btn-secondary';
-    btnEdit.setAttribute('data-name', 'edit');
-    const btnDelete = window.document.createElement('button');
-    btnDelete.className = 'btn btn-secondary';
-    btnDelete.setAttribute('data-name', 'delete');
-    const iconCheck = window.document.createElement('i');
-    iconCheck.className = 'fas fa-check';
-    iconCheck.setAttribute('data-name', 'check');
-    const iconEdit = window.document.createElement('i');
-    iconEdit.className = 'fas fa-pencil';
-    iconEdit.setAttribute('data-name', 'edit');
-    const iconDelete = window.document.createElement('i');
-    iconDelete.className = 'fas fa-trash';
-    iconDelete.setAttribute('data-name', 'delete');
-    // organizando
-    divRow.appendChild(divColTask);
-    divColTask.appendChild(divTask);
-    divTask.innerHTML = `${task.name}`;
-    divRow.appendChild(divColBtns);
-    divColBtns.appendChild(divGroupBtns);
-    divGroupBtns.appendChild(btnCheck);
-    btnCheck.appendChild(iconCheck);    
-    divGroupBtns.appendChild(btnEdit);
-    btnEdit.appendChild(iconEdit); 
-    divGroupBtns.appendChild(btnDelete);
-    btnDelete.appendChild(iconDelete);
-    return divRow;
-};
+// aq jaz, elementos prime
 
 // configurações da navbar
 const abaPrime = () => {
@@ -334,7 +277,7 @@ createNewTask.addEventListener('click', () => {
     if (newTaskName.trim() != '') {
         const task = createTask(newTaskName.trim()); 
         tasks.push(task);
-        sectionTasks.appendChild(elementsPrime(task));
+        sectionTasks.appendChild(elementsHTML['prime'](task));
         buttonsEventListener(false);
         addInLocalStorage();
     } else {
@@ -351,18 +294,10 @@ keyEnter.addEventListener('keypress', event => {
     }
 });
 
-// "responsividade" 0=gg 1=m 2=pp
-let widthViewport = 0;
-;(() => {
-    if (window.screen.width <= 550) {
-        widthViewport = 2;
-    } else if (window.screen.width <= 640) {
-        widthViewport = 1;
-    }
-})();
+// aq jaz, responsive
 
 const optionsLocalStorage = {
-    'false': (e) => sectionTasks.appendChild(elementsPrime(e)),
+    'false': (e) => sectionTasks.appendChild(elementsHTML['prime'](e)),
     'true':  (e) => sectionTasksCompleteds.appendChild(elementsHTML['secondary'](e)),
     'null':  (e) => sectionTasksExcludeds.appendChild(elementsHTML['secondary'](e))
 };
