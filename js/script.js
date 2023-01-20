@@ -18,8 +18,8 @@ const getTask = () => {
         // se está na edição e o nome do elemento é igual ao do checkpoint
         // retorna o indice
         if ((divButtons.hidden) && (element.name == checkpointEdit)) {
-            i = indice
-        } else if((element.name == divTask.innerHTML) && (element.status == false)) {     
+            i = indice;
+        } else if((element.name == divTask.innerText) && (element.status == false)) {     
             return element;
         }
     })
@@ -187,7 +187,6 @@ const buttons = btns => btns.addEventListener('click', event => {
     colBtns = getColBtns(divButtons);
     divTask = getDivTask(divButtons);
     row = getRow(divButtons);
-    console.log(divButtons)
     mainOptions[event.target.dataset.name]();
 });
 
