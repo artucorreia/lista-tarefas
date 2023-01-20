@@ -310,9 +310,6 @@ title.addEventListener('click', abaPrime);
 
 const sectionTasksCompleteds = window.document.getElementById('tasksCompleteds');
 const sectionTasksExcludeds = window.document.getElementById('tasksExcludeds');
-const btnPrime = window.document.getElementById('prime');
-const btnCompleted = window.document.getElementById('completed');
-const btnExcluded = window.document.getElementById('excluded');
 
 const navbar = window.document.getElementById('navbarNav');
 navbar.addEventListener('click', event => {
@@ -355,7 +352,7 @@ createNewTask.addEventListener('click', () => {
 
 // adicionando key(enter)
 const keyEnter = window.document.getElementById('newTask');
-newTask.addEventListener('keypress', event => {
+keyEnter.addEventListener('keypress', event => {
     if (event.key === 'Enter') {
         document.getElementById('createNewTask').click();
     }

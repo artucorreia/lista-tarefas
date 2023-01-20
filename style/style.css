@@ -30,12 +30,12 @@ main > section.cab {
   width: 100%;
 }
 
-main #createNewTask {
+main input#createNewTask {
   color: white;
   margin-right: 7px;
 }
 
-main #createNewTask:hover {
+main input#createNewTask:hover {
   background-color: var(--cor3);
 }
 
@@ -79,7 +79,7 @@ main .col-3 {
   padding: 0;
 }
 
-main #clearAll {
+main button#clearAll {
   background-color: #DC3545;
   color: white;
   position: absolute;
@@ -92,7 +92,7 @@ main #clearAll {
   transition-duration: 0.3s;
 }
 
-main #clearAll:hover {
+main button#clearAll:hover {
   background-color: #a32834;
 }
 
