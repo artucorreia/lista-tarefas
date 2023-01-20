@@ -1,4 +1,5 @@
 import elementsHTML from "./elementsHTML.js";
+import options from "./options.js";
 
 // atualiza o localStorage
 const updateLocalStorage = () => localStorage.tasks = JSON.stringify(tasks);
@@ -21,28 +22,6 @@ const getTask = () => {
 };
 
 const removeRow = () => sectionTasks.removeChild(row);
-
-// marcar como feita
-const check = () => {
-    let task = getTask();
-    task.status = true;
-    removeRow();
-    let elements = elementsHTML['secondary'](task);
-    sectionTasksCompleteds.appendChild(elements);
-    updateLocalStorage();
-    abaPrime();
-};
-
-// excluir task
-const exclude = () => {
-    let task = getTask();
-    task.status = null;
-    removeRow();
-    let elements = elementsHTML['secondary'](task);
-    sectionTasksExcludeds.appendChild(elements);
-    updateLocalStorage();
-    abaPrime();
-};
 
 const changeHidden = btns => {
     elementsEdition.hidden = true;
@@ -132,9 +111,9 @@ const edit = () => {
 
 // direciona para check, edit ou exclude
 const mainOptions = {
-    'check':  () => check(),
+    'check':  () => options['check'](sectionTasksCompleteds),
     'edit':   () => edit(),
-    'delete': () => exclude()
+    'delete': () => options['delete'](sectionTasksExcludeds)
 };
 
 // pega a col dos btns
@@ -154,7 +133,6 @@ let divButtons = '';
 const buttons = btns => btns.addEventListener('click', event => {
     verificationEdit(editActive);
     divButtons = btns;
-    console.log(btns)
     colBtns = getColBtns(btns);
     divTask = getDivTask(btns);
     row = getRow(btns);
@@ -170,10 +148,6 @@ const buttonsEventListener = statusTask => {
 };
 
 const clearInput = txt => txt.value = '';
-
-// aq jaz, responsive
-
-// aq jaz, elementos prime
 
 // configurações da navbar
 const abaPrime = () => {
@@ -294,8 +268,6 @@ keyEnter.addEventListener('keypress', event => {
     }
 });
 
-// aq jaz, responsive
-
 const optionsLocalStorage = {
     'false': (e) => sectionTasks.appendChild(elementsHTML['prime'](e)),
     'true':  (e) => sectionTasksCompleteds.appendChild(elementsHTML['secondary'](e)),
@@ -320,3 +292,10 @@ const optionsLocalStorage = {
         localStorage.setItem('tasks', '');
     }
 })();
+
+export default {
+    getTask: getTask,
+    updateLocalStorage: updateLocalStorage,
+    abaPrime: abaPrime,
+    removeRow: removeRow
+};
