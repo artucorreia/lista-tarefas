@@ -1,4 +1,4 @@
-import elementsHTML from "./elementsHTML.js";
+import elementsHTML from "./elements-html.js";
 import options from "./options.js";
 
 // atualiza o localStorage
@@ -140,7 +140,7 @@ const buttons = btns => btns.addEventListener('click', event => {
 });
 
 // seta o event listener para o group buttons
-// sempre que é gerado
+// sempre que algum é gerado
 const buttonsEventListener = statusTask => {
     if (statusTask == false) {
         buttons(sectionTasks.lastElementChild.lastElementChild.firstElementChild);

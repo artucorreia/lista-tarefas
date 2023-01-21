@@ -1,5 +1,5 @@
 import functions from "./script.js";
-import elementsHTML from "./elementsHTML.js";
+import elementsHTML from "./elements-html.js";
 
 // marcar como feita
 const check = section => {
