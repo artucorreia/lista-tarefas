@@ -3,7 +3,7 @@ import elementsHTML from "./elements-html.js";
 import options from "./options.js";
 import section from "./sections.js";
 import abaPrime from "./navbar.js";
-import localstorage from './localstorage.js'
+import localstorage from './localstorage.js';
 import clearAll from "./clearAll.js";
 
 // direciona para check, edit ou exclude
@@ -24,7 +24,7 @@ let row = '';
 let divTask = '';
 let divButtons = '';
 const buttons = btns => btns.addEventListener('click', event => {
-    options['verificationEdit'](options['editActive']);
+    options['verificationEdit']();
     divButtons = btns;
     divTask = getDivTask(btns);
     row = getRow(btns);
@@ -39,16 +39,16 @@ const buttonsEventListener = statusTask => {
     }
 };
 
-const clearInput = txt => txt.value = '';
-
 const btnClearAll = window.document.getElementById('clearAll');
 btnClearAll.addEventListener('click', clearAll);
 btnClearAll.hidden = true;
 
+const clearInput = txt => txt.value = '';
+
 const createNewTask = window.document.getElementById('createNewTask');
 createNewTask.addEventListener('click', () => {
     abaPrime();
-    options['verificationEdit'](options['editActive']);
+    options['verificationEdit']();
     let newTaskTxt = window.document.getElementById('newTask');
     let newTaskName = newTaskTxt.value;
     if (newTaskName.trim() != '') {

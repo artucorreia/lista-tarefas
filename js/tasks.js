@@ -10,4 +10,4 @@ const createTask = name => {
 export default {
     tasks: tasks,
     createTask: createTask
-}
+};

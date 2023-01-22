@@ -6,4 +6,4 @@ export default {
     tasks: sectionTasks,
     completed: sectionTasksCompleteds,
     deleted: sectionTasksExcludeds,
-}
+};

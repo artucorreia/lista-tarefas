@@ -1,5 +1,6 @@
+// modulo para as opções principais
+
 import tasks from "./tasks.js";
-// import localstorage fupdate
 import elementsHTML from "./elements-html.js";
 import section from "./sections.js";
 import abaPrime from "./navbar.js";
@@ -140,5 +141,4 @@ export default {
     delete: exclude,
     edit: edit,
     verificationEdit: verificationEdit,
-    editActive: editActive
-}
+};
