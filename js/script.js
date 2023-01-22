@@ -4,6 +4,7 @@ import options from "./options.js";
 import section from "./sections.js";
 import abaPrime from "./navbar.js";
 import localstorage from './localstorage.js'
+import clearAll from "./clearAll.js";
 
 // direciona para check, edit ou exclude
 const mainOptions = {
@@ -40,40 +41,8 @@ const buttonsEventListener = statusTask => {
 
 const clearInput = txt => txt.value = '';
 
-// remove as tasks com status undefined
-const filterUndefined = () => {
-    tasks['tasks'] = tasks['tasks'].filter((element) => {
-        if (element.status !== undefined) {
-            return element;
-        }
-    })
-    localstorage['update']();
-};
-
-// muda o status da tarefa para undefined
-const statusUndefined = trueOrNull => {
-    tasks['tasks'].map((element) => {
-        if (element.status == trueOrNull) {
-            element.status = undefined;
-        }
-    })
-};
-
-// botão limpar tudo
 const btnClearAll = window.document.getElementById('clearAll');
-btnClearAll.addEventListener('click', () => {
-    let confirm = window.confirm('Deseja apagar todos os itens desta aba?');
-    if (confirm) {
-        if (!section['completed'].hidden) {
-            section['completed'].innerHTML = '';
-            statusUndefined(true);
-        } else {
-            section['deleted'].innerHTML = '';
-            statusUndefined(null);
-        }
-    }
-    filterUndefined();
-});
+btnClearAll.addEventListener('click', clearAll);
 btnClearAll.hidden = true;
 
 const createNewTask = window.document.getElementById('createNewTask');
