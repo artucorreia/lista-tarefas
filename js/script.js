@@ -2,118 +2,9 @@ import elementsHTML from "./elements-html.js";
 import options from "./options.js";
 
 // atualiza o localStorage
-const updateLocalStorage = () => {
-    // console.log(tasks)
-    // console.log('localS: ' + localStorage.tasks)
-    localStorage.tasks = JSON.stringify(tasks);
-    // console.log(tasks)
-    // console.log('localS: ' + localStorage.tasks)
-}
-
-// pegar a task
-// let i = 0;
-// const getTask = checkpointEdit => { 
-//     let filter = [];
-//     filter = tasks.filter((element, indice) => {
-//         // se o botões estiverem escondido(está na edição)
-//         // se está na edição e o nome do elemento é igual ao do checkpoint
-//         // retorna o indice
-//         if ((divButtons.hidden) && (element.name == checkpointEdit)) {
-//             i = indice;
-//         } else if((element.name == divTask.innerText) && (element.status == false)) {     
-//             return element;
-//         }
-//     })
-//     return filter[0];
-// };
+const updateLocalStorage = () => localStorage.tasks = JSON.stringify(tasks);
 
 const removeRow = () => sectionTasks.removeChild(row);
-
-// const changeHidden = btns => {
-//     elementsEdition.hidden = true;
-//     btns.hidden = false;
-// };
-
-// const cancelEdition = () => {
-//     divTask.contentEditable = false;
-//     divTask.innerHTML = checkpointEdit;
-//     changeHidden(divButtons);
-//     editActive = false;
-// };
-
-// const editNull = text => {
-//     if (text.trim() == '') {
-//         editOptions['cancelEdition']();
-//         return true;
-//     } else {
-//         return false;
-//     }
-// };
-
-// const confirmEdition = () => {
-//     if (!editNull(divTask.innerText)) {
-//         getTask();
-//         tasks[i].name = divTask.innerText.trim();
-//         divTask.innerHTML = divTask.innerText.trim();
-//         divTask.contentEditable = false;
-//         changeHidden(divButtons);
-//         updateLocalStorage();
-//     }
-//     editActive = false;
-// };
-
-// const editOptions = {
-//     'confirmEdition': () => confirmEdition(),
-//     'cancelEdition':  () => cancelEdition() 
-// };
-
-// const optionsEdit = event => editOptions[event.target.dataset.name](); 
-
-// const btnsEdit = btns => btns.addEventListener('click', optionsEdit); 
-
-// const keyEdit = div => {
-//     div.addEventListener('keypress', event => {
-//         if (event.key === 'Enter') {
-//             document.getElementById('btnsEdit').firstChild.click();
-//         }
-//     });
-// };
-
-// const elementsEdition = elementsHTML['edit']();
-// let firstTime = true;
-// let before = '';
-// const openElements = () => {
-//     btnsEdit(elementsEdition);
-//     if (firstTime || colBtns != before) {
-//         colBtns.appendChild(elementsEdition);
-//     }
-//     elementsEdition.hidden = false;
-//     before = colBtns; 
-//     firstTime = false;
-// };
-
-// const verificationEdit = active => {
-//     if (active) {
-//         return editOptions['cancelEdition']();
-//     }
-// };
-
-// const hiddenButtons = btns => btns.hidden = true;
-
-// let checkpointEdit = '';
-// const createCheckpoint = () => checkpointEdit = divTask.innerText;
-
-// // editar task
-// let editActive = false;
-// const edit = () => {
-//     editActive = true
-//     createCheckpoint();
-//     hiddenButtons(divButtons);
-//     divTask.contentEditable = true;
-//     divTask.focus();
-//     keyEdit(divTask);
-//     openElements();
-// };
 
 // direciona para check, edit ou exclude
 const mainOptions = {
@@ -301,9 +192,7 @@ const optionsLocalStorage = {
 
 export default {
     tasks: tasks,
-    // getTask: getTask,
     updateLocalStorage: updateLocalStorage,
     abaPrime: abaPrime,
     removeRow: removeRow,
-    // indice: i
 };

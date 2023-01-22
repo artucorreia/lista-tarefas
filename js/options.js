@@ -3,17 +3,14 @@ import elementsHTML from "./elements-html.js";
 
 let i = 0;
 const getTask = (divTask, divBtns) => { 
-    console.log('foi')
     let filter = [];
     filter = functions['tasks'].filter((element, indice) => {
         // se o botões estiverem escondido(está na edição)
         // se está na edição e o nome do elemento é igual ao do checkpoint
         // retorna o indice
         if ((divBtns.hidden) && (element.name == checkpointEdit)) {
-            console.log('nao ok')
             i = indice;
         } else if((element.name == divTask.innerText) && (element.status == false)) {     
-            console.log('ok')
             return element;
         }
     })
@@ -23,7 +20,6 @@ const getTask = (divTask, divBtns) => {
 // marcar como feita
 const check = (section, divTask) => {
     let task = getTask(divTask, saveDivButtons);
-    console.log(task);
     task.status = true;
     functions['removeRow']();
     let elements = elementsHTML['secondary'](task);
@@ -35,7 +31,6 @@ const check = (section, divTask) => {
 // excluir task
 const exclude = (section, divTask) => {
     let task = getTask(divTask, saveDivButtons);
-    console.log(task);
     task.status = null;
     functions['removeRow']();
     let elements = elementsHTML['secondary'](task);
@@ -68,9 +63,7 @@ const editNull = text => {
 const confirmEdition = (divTask, divBtns) => {
     if (!editNull(divTask.innerText)) {
         getTask(saveDivTask, saveDivButtons);
-        // console.log(functions['tasks'][i].name)
         functions['tasks'][i].name = divTask.innerText.trim();
-        // console.log(functions['tasks'][i].name)
         divTask.innerHTML = divTask.innerText.trim();
         divTask.contentEditable = false;
         changeHidden(divBtns);
