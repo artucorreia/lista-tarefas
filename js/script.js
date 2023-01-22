@@ -1,10 +1,11 @@
+import tasks from "./tasks.js";
 import elementsHTML from "./elements-html.js";
 import options from "./options.js";
 import section from "./sections.js";
 import abaPrime from "./navbar.js";
 
 // atualiza o localStorage
-const updateLocalStorage = () => localStorage.tasks = JSON.stringify(tasks);
+const updateLocalStorage = () => localStorage.tasks = JSON.stringify(tasks['tasks']);
 
 // direciona para check, edit ou exclude
 const mainOptions = {
@@ -43,7 +44,7 @@ const clearInput = txt => txt.value = '';
 
 // remove as tasks com status undefined
 const filterUndefined = () => {
-    tasks = tasks.filter((element) => {
+    tasks['tasks'] = tasks['tasks'].filter((element) => {
         if (element.status !== undefined) {
             return element;
         }
@@ -53,7 +54,7 @@ const filterUndefined = () => {
 
 // muda o status da tarefa para undefined
 const statusUndefined = trueOrNull => {
-    tasks.map((element) => {
+    tasks['tasks'].map((element) => {
         if (element.status == trueOrNull) {
             element.status = undefined;
         }
@@ -78,17 +79,17 @@ btnClearAll.addEventListener('click', () => {
 btnClearAll.hidden = true;
 
 const addInLocalStorage = () => {
-    localStorage.tasks = JSON.stringify(tasks);
+    localStorage.tasks = JSON.stringify(tasks['tasks']);
 };
 
-// nova task
-let tasks = [];
-const createTask = name => {
-    return {
-        name: name,
-        status: false
-    }
-};
+// // nova task
+// let tasks = [];
+// const createTask = name => {
+//     return {
+//         name: name,
+//         status: false
+//     }
+// };
 
 const createNewTask = window.document.getElementById('createNewTask');
 createNewTask.addEventListener('click', () => {
@@ -97,8 +98,8 @@ createNewTask.addEventListener('click', () => {
     let newTaskTxt = window.document.getElementById('newTask');
     let newTaskName = newTaskTxt.value;
     if (newTaskName.trim() != '') {
-        const task = createTask(newTaskName.trim()); 
-        tasks.push(task);
+        const task = tasks['createTask'](newTaskName.trim()); 
+        tasks['tasks'].push(task);
         section['tasks'].appendChild(elementsHTML['prime'](task));
         buttonsEventListener(false);
         addInLocalStorage();
@@ -125,8 +126,8 @@ const optionsLocalStorage = {
 // exibindo localStorage
 ;(() => {
     if (localStorage.tasks != '' && localStorage.tasks != null){
-        tasks = JSON.parse(localStorage.tasks);
-        tasks.map((element) => {
+        tasks['tasks'] = JSON.parse(localStorage.tasks);
+        tasks['tasks'].map((element) => {
             optionsLocalStorage[element.status](element);
             buttonsEventListener(element.status);
         });
@@ -142,6 +143,5 @@ const optionsLocalStorage = {
 })();
 
 export default {
-    tasks: tasks,
     updateLocalStorage: updateLocalStorage
 };

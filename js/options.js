@@ -1,3 +1,4 @@
+import tasks from "./tasks.js";
 import functions from "./script.js";
 import elementsHTML from "./elements-html.js";
 import section from "./sections.js";
@@ -8,7 +9,7 @@ const removeRow = row => section['tasks'].removeChild(row);
 let i = 0;
 const getTask = (divTask, divBtns) => { 
     let filter = [];
-    filter = functions['tasks'].filter((element, indice) => {
+    filter = tasks['tasks'].filter((element, indice) => {
         // se o botões estiverem escondido(está na edição)
         // se está na edição e o nome do elemento é igual ao do checkpoint
         // retorna o indice
@@ -67,7 +68,7 @@ const editNull = text => {
 const confirmEdition = (divTask, divBtns) => {
     if (!editNull(divTask.innerText)) {
         getTask(saveDivTask, saveDivButtons);
-        functions['tasks'][i].name = divTask.innerText.trim();
+        tasks['tasks'][i].name = divTask.innerText.trim();
         divTask.innerHTML = divTask.innerText.trim();
         divTask.contentEditable = false;
         changeHidden(divBtns);
