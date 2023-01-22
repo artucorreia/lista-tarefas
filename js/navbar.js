@@ -24,9 +24,9 @@ const abaExcluded = () => {
 };
 
 const optionsNavbar = {
-    'prime':     () => abaPrime(),
-    'completed': () => abaCompleted(),
-    'excluded':  () => abaExcluded()
+    prime:     () => abaPrime(),
+    completed: () => abaCompleted(),
+    excluded:  () => abaExcluded()
 };
 
 // abas navbar

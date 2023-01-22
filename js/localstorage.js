@@ -12,9 +12,9 @@ const addInLocalStorage = () => {
 };
 
 const optionsLocalStorage = {
-    'false': (e) => section['tasks'].appendChild(elementsHTML['prime'](e)),
-    'true':  (e) => section['completed'].appendChild(elementsHTML['secondary'](e)),
-    'null':  (e) => section['deleted'].appendChild(elementsHTML['secondary'](e))
+    false: (e) => section['tasks'].appendChild(elementsHTML['prime'](e)),
+    true:  (e) => section['completed'].appendChild(elementsHTML['secondary'](e)),
+    null:  (e) => section['deleted'].appendChild(elementsHTML['secondary'](e))
 };
 
 const displayLocalStorage = (buttonsEventListener) => {

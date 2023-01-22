@@ -8,9 +8,9 @@ import clearAll from "./clearAll.js";
 
 // direciona para check, edit ou exclude
 const mainOptions = {
-    'check':  () => options['check'](divTask, row),
-    'edit':   () => options['edit'](divButtons, divTask),
-    'delete': () => options['delete'](divTask, row)
+    check:  () => options['check'](divTask, row),
+    edit:   () => options['edit'](divButtons, divTask),
+    delete: () => options['delete'](divTask, row)
 };
 
 // pega a row da task

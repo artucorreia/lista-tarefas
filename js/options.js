@@ -80,8 +80,8 @@ const confirmEdition = (divTask, divBtns) => {
 };
 
 const editOptions = {
-    'confirmEdition': () => confirmEdition(saveDivTask, saveDivButtons),
-    'cancelEdition':  () => cancelEdition(saveDivTask, saveDivButtons) 
+    confirmEdition: () => confirmEdition(saveDivTask, saveDivButtons),
+    cancelEdition:  () => cancelEdition(saveDivTask, saveDivButtons) 
 };
 
 const optionsEdit = event => editOptions[event.target.dataset.name](); 
