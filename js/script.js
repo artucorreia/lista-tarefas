@@ -3,9 +3,10 @@ import elementsHTML from "./elements-html.js";
 import options from "./options.js";
 import section from "./sections.js";
 import abaPrime from "./navbar.js";
+import localstorage from './localstorage.js'
 
 // atualiza o localStorage
-const updateLocalStorage = () => localStorage.tasks = JSON.stringify(tasks['tasks']);
+// const updateLocalStorage = () => localStorage.tasks = JSON.stringify(tasks['tasks']);
 
 // direciona para check, edit ou exclude
 const mainOptions = {
@@ -49,7 +50,7 @@ const filterUndefined = () => {
             return element;
         }
     })
-    updateLocalStorage();
+    localstorage['update']();
 };
 
 // muda o status da tarefa para undefined
@@ -78,17 +79,8 @@ btnClearAll.addEventListener('click', () => {
 });
 btnClearAll.hidden = true;
 
-const addInLocalStorage = () => {
-    localStorage.tasks = JSON.stringify(tasks['tasks']);
-};
-
-// // nova task
-// let tasks = [];
-// const createTask = name => {
-//     return {
-//         name: name,
-//         status: false
-//     }
+// const addInLocalStorage = () => {
+//     localStorage.tasks = JSON.stringify(tasks['tasks']);
 // };
 
 const createNewTask = window.document.getElementById('createNewTask');
@@ -102,7 +94,7 @@ createNewTask.addEventListener('click', () => {
         tasks['tasks'].push(task);
         section['tasks'].appendChild(elementsHTML['prime'](task));
         buttonsEventListener(false);
-        addInLocalStorage();
+        localstorage['add']();
     } else {
         alert('Adicione uma tarefa');
     }
@@ -117,31 +109,31 @@ keyEnter.addEventListener('keypress', event => {
     }
 });
 
-const optionsLocalStorage = {
-    'false': (e) => section['tasks'].appendChild(elementsHTML['prime'](e)),
-    'true':  (e) => section['completed'].appendChild(elementsHTML['secondary'](e)),
-    'null':  (e) => section['deleted'].appendChild(elementsHTML['secondary'](e))
-};
+// const optionsLocalStorage = {
+//     'false': (e) => section['tasks'].appendChild(elementsHTML['prime'](e)),
+//     'true':  (e) => section['completed'].appendChild(elementsHTML['secondary'](e)),
+//     'null':  (e) => section['deleted'].appendChild(elementsHTML['secondary'](e))
+// };
 
 // exibindo localStorage
 ;(() => {
-    if (localStorage.tasks != '' && localStorage.tasks != null){
-        tasks['tasks'] = JSON.parse(localStorage.tasks);
-        tasks['tasks'].map((element) => {
-            optionsLocalStorage[element.status](element);
-            buttonsEventListener(element.status);
-        });
-    }
-    abaPrime();
+    // if (localStorage.tasks != '' && localStorage.tasks != null){
+    //     tasks['tasks'] = JSON.parse(localStorage.tasks);
+    //     tasks['tasks'].map((element) => {
+    //         optionsLocalStorage[element.status](element);
+    //         buttonsEventListener(element.status);
+    //     });
+    // }
+    // abaPrime();
+    localstorage['set']();
+    localstorage['display'](buttonsEventListener);
 })();
 
 // setando localStorage
-;(() => {
-    if (localStorage.tasks == null) {
-        localStorage.setItem('tasks', '');
-    }
-})();
+// ;(() => {
+//     if (localStorage.tasks == null) {
+//         localStorage.setItem('tasks', '');
+//     }
+// })();
 
-export default {
-    updateLocalStorage: updateLocalStorage
-};
+// export default buttons;

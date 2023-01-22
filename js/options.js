@@ -1,8 +1,9 @@
 import tasks from "./tasks.js";
-import functions from "./script.js";
+// import localstorage fupdate
 import elementsHTML from "./elements-html.js";
 import section from "./sections.js";
 import abaPrime from "./navbar.js";
+import localstorage from "./localstorage.js";
 
 const removeRow = row => section['tasks'].removeChild(row);
 
@@ -29,7 +30,7 @@ const check = (divTask, row) => {
     removeRow(row);
     let elements = elementsHTML['secondary'](task);
     section['completed'].appendChild(elements);
-    functions['updateLocalStorage']();
+    localstorage['update']();
     abaPrime();
 };
 
@@ -40,7 +41,7 @@ const exclude = (divTask, row) => {
     removeRow(row);
     let elements = elementsHTML['secondary'](task);
     section['deleted'].appendChild(elements);
-    functions['updateLocalStorage']();
+    localstorage['update']();
     abaPrime();
 };
 
@@ -72,7 +73,7 @@ const confirmEdition = (divTask, divBtns) => {
         divTask.innerHTML = divTask.innerText.trim();
         divTask.contentEditable = false;
         changeHidden(divBtns);
-        functions['updateLocalStorage']();
+        localstorage['update']();
     }
     editActive = false;
 };
