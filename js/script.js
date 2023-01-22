@@ -6,13 +6,11 @@ import abaPrime from "./navbar.js";
 // atualiza o localStorage
 const updateLocalStorage = () => localStorage.tasks = JSON.stringify(tasks);
 
-const removeRow = () => section['tasks'].removeChild(row);
-
 // direciona para check, edit ou exclude
 const mainOptions = {
-    'check':  () => options['check'](divTask),
+    'check':  () => options['check'](divTask, row),
     'edit':   () => options['edit'](divButtons, divTask),
-    'delete': () => options['delete'](divTask)
+    'delete': () => options['delete'](divTask, row)
 };
 
 // pega a row da task
@@ -145,6 +143,5 @@ const optionsLocalStorage = {
 
 export default {
     tasks: tasks,
-    updateLocalStorage: updateLocalStorage,
-    removeRow: removeRow,
+    updateLocalStorage: updateLocalStorage
 };

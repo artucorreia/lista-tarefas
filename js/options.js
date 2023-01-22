@@ -3,6 +3,8 @@ import elementsHTML from "./elements-html.js";
 import section from "./sections.js";
 import abaPrime from "./navbar.js";
 
+const removeRow = row => section['tasks'].removeChild(row);
+
 let i = 0;
 const getTask = (divTask, divBtns) => { 
     let filter = [];
@@ -20,10 +22,10 @@ const getTask = (divTask, divBtns) => {
 };
 
 // marcar como feita
-const check = divTask => {
+const check = (divTask, row) => {
     let task = getTask(divTask, saveDivButtons);
     task.status = true;
-    functions['removeRow']();
+    removeRow(row);
     let elements = elementsHTML['secondary'](task);
     section['completed'].appendChild(elements);
     functions['updateLocalStorage']();
@@ -31,10 +33,10 @@ const check = divTask => {
 };
 
 // excluir task
-const exclude = divTask => {
+const exclude = (divTask, row) => {
     let task = getTask(divTask, saveDivButtons);
     task.status = null;
-    functions['removeRow']();
+    removeRow(row);
     let elements = elementsHTML['secondary'](task);
     section['deleted'].appendChild(elements);
     functions['updateLocalStorage']();
