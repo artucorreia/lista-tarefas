@@ -1,5 +1,7 @@
 import functions from "./script.js";
 import elementsHTML from "./elements-html.js";
+import section from "./sections.js";
+import abaPrime from "./navbar.js";
 
 let i = 0;
 const getTask = (divTask, divBtns) => { 
@@ -18,25 +20,25 @@ const getTask = (divTask, divBtns) => {
 };
 
 // marcar como feita
-const check = (section, divTask) => {
+const check = divTask => {
     let task = getTask(divTask, saveDivButtons);
     task.status = true;
     functions['removeRow']();
     let elements = elementsHTML['secondary'](task);
-    section.appendChild(elements);
+    section['completed'].appendChild(elements);
     functions['updateLocalStorage']();
-    functions['abaPrime']();
+    abaPrime();
 };
 
 // excluir task
-const exclude = (section, divTask) => {
+const exclude = divTask => {
     let task = getTask(divTask, saveDivButtons);
     task.status = null;
     functions['removeRow']();
     let elements = elementsHTML['secondary'](task);
-    section.appendChild(elements);
+    section['deleted'].appendChild(elements);
     functions['updateLocalStorage']();
-    functions['abaPrime']();
+    abaPrime();
 };
 
 const changeHidden = btns => {

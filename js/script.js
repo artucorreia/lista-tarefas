@@ -1,20 +1,19 @@
 import elementsHTML from "./elements-html.js";
 import options from "./options.js";
+import section from "./sections.js";
+import abaPrime from "./navbar.js";
 
 // atualiza o localStorage
 const updateLocalStorage = () => localStorage.tasks = JSON.stringify(tasks);
 
-const removeRow = () => sectionTasks.removeChild(row);
+const removeRow = () => section['tasks'].removeChild(row);
 
 // direciona para check, edit ou exclude
 const mainOptions = {
-    'check':  () => options['check'](sectionTasksCompleteds, divTask),
+    'check':  () => options['check'](divTask),
     'edit':   () => options['edit'](divButtons, divTask),
-    'delete': () => options['delete'](sectionTasksExcludeds, divTask)
+    'delete': () => options['delete'](divTask)
 };
-
-// pega a col dos btns
-const getColBtns = btns => btns.parentElement;
 
 // pega a row da task
 const getRow = btns => btns.parentElement.parentElement;
@@ -24,13 +23,11 @@ const getDivTask = btns => btns.parentElement.previousElementSibling.firstElemen
 
 // pega os elementos HTML
 let row = '';
-let colBtns = '';
 let divTask = '';
 let divButtons = '';
 const buttons = btns => btns.addEventListener('click', event => {
     options['verificationEdit'](options['editActive']);
     divButtons = btns;
-    colBtns = getColBtns(btns);
     divTask = getDivTask(btns);
     row = getRow(btns);
     mainOptions[event.target.dataset.name]();
@@ -40,39 +37,11 @@ const buttons = btns => btns.addEventListener('click', event => {
 // sempre que algum é gerado
 const buttonsEventListener = statusTask => {
     if (statusTask == false) {
-        buttons(sectionTasks.lastElementChild.lastElementChild.firstElementChild);
+        buttons(section['tasks'].lastElementChild.lastElementChild.firstElementChild);
     }
 };
 
 const clearInput = txt => txt.value = '';
-
-// configurações da navbar
-const abaPrime = () => {
-    sectionTasks.hidden = false;
-    sectionTasksCompleteds.hidden = true;
-    sectionTasksExcludeds.hidden = true;
-    btnClearAll.hidden = true;
-};
-
-const abaCompleted = () => {
-    sectionTasks.hidden = true;
-    sectionTasksCompleteds.hidden = false;
-    sectionTasksExcludeds.hidden = true;
-    btnClearAll.hidden = false;
-};
-
-const abaExcluded = () => {
-    sectionTasks.hidden = true;
-    sectionTasksCompleteds.hidden = true;
-    sectionTasksExcludeds.hidden = false;
-    btnClearAll.hidden = false;
-};
-
-const optionsNavbar = {
-    'prime':     () => abaPrime(),
-    'completed': () => abaCompleted(),
-    'excluded':  () => abaExcluded()
-};
 
 // remove as tasks com status undefined
 const filterUndefined = () => {
@@ -98,32 +67,17 @@ const btnClearAll = window.document.getElementById('clearAll');
 btnClearAll.addEventListener('click', () => {
     let confirm = window.confirm('Deseja apagar todos os itens desta aba?');
     if (confirm) {
-        if (!sectionTasksCompleteds.hidden) {
-            sectionTasksCompleteds.innerHTML = '';
+        if (!section['completed'].hidden) {
+            section['completed'].innerHTML = '';
             statusUndefined(true);
         } else {
-            sectionTasksExcludeds.innerHTML = '';
+            section['deleted'].innerHTML = '';
             statusUndefined(null);
         }
     }
     filterUndefined();
 });
 btnClearAll.hidden = true;
-
-// abas navbar
-const title = window.document.getElementById('title');
-title.addEventListener('click', abaPrime);
-
-const sectionTasksCompleteds = window.document.getElementById('tasksCompleteds');
-const sectionTasksExcludeds = window.document.getElementById('tasksExcludeds');
-
-const navbar = window.document.getElementById('navbarNav');
-navbar.addEventListener('click', event => {
-    const evento = event.target.id
-    if (evento != 'navbarNav') {
-        optionsNavbar[evento]();
-    }
-});
 
 const addInLocalStorage = () => {
     localStorage.tasks = JSON.stringify(tasks);
@@ -138,7 +92,6 @@ const createTask = name => {
     }
 };
 
-const sectionTasks = window.document.getElementById('tasks');
 const createNewTask = window.document.getElementById('createNewTask');
 createNewTask.addEventListener('click', () => {
     abaPrime();
@@ -148,7 +101,7 @@ createNewTask.addEventListener('click', () => {
     if (newTaskName.trim() != '') {
         const task = createTask(newTaskName.trim()); 
         tasks.push(task);
-        sectionTasks.appendChild(elementsHTML['prime'](task));
+        section['tasks'].appendChild(elementsHTML['prime'](task));
         buttonsEventListener(false);
         addInLocalStorage();
     } else {
@@ -166,9 +119,9 @@ keyEnter.addEventListener('keypress', event => {
 });
 
 const optionsLocalStorage = {
-    'false': (e) => sectionTasks.appendChild(elementsHTML['prime'](e)),
-    'true':  (e) => sectionTasksCompleteds.appendChild(elementsHTML['secondary'](e)),
-    'null':  (e) => sectionTasksExcludeds.appendChild(elementsHTML['secondary'](e))
+    'false': (e) => section['tasks'].appendChild(elementsHTML['prime'](e)),
+    'true':  (e) => section['completed'].appendChild(elementsHTML['secondary'](e)),
+    'null':  (e) => section['deleted'].appendChild(elementsHTML['secondary'](e))
 };
 
 // exibindo localStorage
@@ -193,6 +146,5 @@ const optionsLocalStorage = {
 export default {
     tasks: tasks,
     updateLocalStorage: updateLocalStorage,
-    abaPrime: abaPrime,
     removeRow: removeRow,
 };
