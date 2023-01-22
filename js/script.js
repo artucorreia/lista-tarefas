@@ -5,9 +5,6 @@ import section from "./sections.js";
 import abaPrime from "./navbar.js";
 import localstorage from './localstorage.js'
 
-// atualiza o localStorage
-// const updateLocalStorage = () => localStorage.tasks = JSON.stringify(tasks['tasks']);
-
 // direciona para check, edit ou exclude
 const mainOptions = {
     'check':  () => options['check'](divTask, row),
@@ -79,10 +76,6 @@ btnClearAll.addEventListener('click', () => {
 });
 btnClearAll.hidden = true;
 
-// const addInLocalStorage = () => {
-//     localStorage.tasks = JSON.stringify(tasks['tasks']);
-// };
-
 const createNewTask = window.document.getElementById('createNewTask');
 createNewTask.addEventListener('click', () => {
     abaPrime();
@@ -109,31 +102,9 @@ keyEnter.addEventListener('keypress', event => {
     }
 });
 
-// const optionsLocalStorage = {
-//     'false': (e) => section['tasks'].appendChild(elementsHTML['prime'](e)),
-//     'true':  (e) => section['completed'].appendChild(elementsHTML['secondary'](e)),
-//     'null':  (e) => section['deleted'].appendChild(elementsHTML['secondary'](e))
-// };
-
-// exibindo localStorage
+// setando e exibindo localStorage
 ;(() => {
-    // if (localStorage.tasks != '' && localStorage.tasks != null){
-    //     tasks['tasks'] = JSON.parse(localStorage.tasks);
-    //     tasks['tasks'].map((element) => {
-    //         optionsLocalStorage[element.status](element);
-    //         buttonsEventListener(element.status);
-    //     });
-    // }
-    // abaPrime();
     localstorage['set']();
     localstorage['display'](buttonsEventListener);
+    abaPrime();
 })();
-
-// setando localStorage
-// ;(() => {
-//     if (localStorage.tasks == null) {
-//         localStorage.setItem('tasks', '');
-//     }
-// })();
-
-// export default buttons;

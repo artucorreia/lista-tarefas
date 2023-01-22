@@ -1,14 +1,8 @@
+// arquivo para o localStorage
+
 import tasks from "./tasks.js";
 import section from "./sections.js";
 import elementsHTML from "./elements-html.js";
-import abaPrime from "./navbar.js";
-// import buttons from "./script.js";
-
-// const buttonsEventListener = statusTask => {
-//     if (statusTask == false) {
-//         buttons(section['tasks'].lastElementChild.lastElementChild.firstElementChild);
-//     }
-// };
 
 // atualiza o localStorage
 const updateLocalStorage = () => localStorage.tasks = JSON.stringify(tasks['tasks']);
@@ -23,10 +17,6 @@ const optionsLocalStorage = {
     'null':  (e) => section['deleted'].appendChild(elementsHTML['secondary'](e))
 };
 
-// exibindo localStorage
-// ;(() => {
-// })();
-
 const displayLocalStorage = (buttonsEventListener) => {
     if (localStorage.tasks != '' && localStorage.tasks != null){
         tasks['tasks'] = JSON.parse(localStorage.tasks);
@@ -35,11 +25,7 @@ const displayLocalStorage = (buttonsEventListener) => {
             buttonsEventListener(element.status);
         });
     }
-    abaPrime();
 };
-
-// ;(() => {
-// })();
 
 // setando localStorage
 const setLocalStorage = () => {
