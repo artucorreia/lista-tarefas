@@ -42,7 +42,7 @@ const exclude = (divTask, row) => {
     removeRow(row);
     let elements = elementsHTML['secondary'](task);
     section['deleted'].appendChild(elements);
-    localstorage['update']();
+    // localstorage['update']();
     abaPrime();
 };
 

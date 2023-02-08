@@ -1,9 +1,12 @@
-const sectionTasks = window.document.getElementById('tasks');
-const sectionTasksCompleteds = window.document.getElementById('tasksCompleteds');
-const sectionTasksExcludeds = window.document.getElementById('tasksExcludeds');
+const sectionTasks = 
+    window.document.getElementById('tasks');
+const sectionTasksDone = 
+    window.document.getElementById('tasksDone');
+const sectionTasksExcludeds = 
+    window.document.getElementById('tasksExcludeds');
 
 export default {
-    tasks: sectionTasks,
-    completed: sectionTasksCompleteds,
+    tasks  : sectionTasks,
+    done   : sectionTasksDone,
     deleted: sectionTasksExcludeds,
 };

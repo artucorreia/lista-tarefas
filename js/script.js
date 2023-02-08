@@ -1,16 +1,19 @@
+import TaskManager from "./class.js";
 import tasks from "./tasks.js";
 import elementsHTML from "./elements-html.js";
 import options from "./options.js";
 import section from "./sections.js";
 import abaPrime from "./navbar.js";
 import localstorage from './localstorage.js';
-import clearAll from "./clearAll.js";
+import clearAll from "./clear-all.js";
+
+const manager = new TaskManager();
 
 // direciona para check, edit ou exclude
 const mainOptions = {
-    check:  () => options['check'](divTask, row),
-    edit:   () => options['edit'](divButtons, divTask),
-    delete: () => options['delete'](divTask, row)
+    check:  () => manager.checkTask(divTask, row),
+    // edit:   () => options['edit'](divButtons, divTask),
+    delete: () => manager.deleteTask(divTask, row)
 };
 
 // pega a row da task
@@ -35,7 +38,9 @@ const buttons = btns => btns.addEventListener('click', event => {
 // sempre que algum é gerado
 const buttonsEventListener = statusTask => {
     if (statusTask == false) {
-        buttons(section['tasks'].lastElementChild.lastElementChild.firstElementChild);
+        buttons(
+            section['tasks'].lastElementChild.lastElementChild.firstElementChild
+        );
     }
 };
 
@@ -52,9 +57,11 @@ createNewTask.addEventListener('click', () => {
     let newTaskTxt = window.document.getElementById('newTask');
     let newTaskName = newTaskTxt.value;
     if (newTaskName.trim() != '') {
-        const task = tasks['createTask'](newTaskName.trim()); 
-        tasks['tasks'].push(task);
-        section['tasks'].appendChild(elementsHTML['prime'](task));
+        const task = manager.addTask(newTaskName.trim());
+        // console.log(task);
+        // const task = tasks['createTask'](newTaskName.trim()); 
+        tasks['tasks'].push(task[task.length - 1]);
+        section['tasks'].appendChild(elementsHTML['prime'](task[task.length - 1]));
         buttonsEventListener(false);
         localstorage['add']();
     } else {
@@ -63,7 +70,7 @@ createNewTask.addEventListener('click', () => {
     clearInput(newTaskTxt);
 });
 
-// adicionando key(enter)
+// key para adicionar tasks(enter)
 const keyEnter = window.document.getElementById('newTask');
 keyEnter.addEventListener('keypress', event => {
     if (event.key === 'Enter') {
@@ -72,8 +79,8 @@ keyEnter.addEventListener('keypress', event => {
 });
 
 // setando e exibindo localStorage
-;(() => {
-    localstorage['set']();
-    localstorage['display'](buttonsEventListener);
-    abaPrime();
-})();
+// ;(() => {
+//     localstorage['set']();
+//     localstorage['display'](buttonsEventListener);
+//     abaPrime();
+// })();

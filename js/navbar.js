@@ -3,30 +3,30 @@ import section from "./sections.js";
 
 // configurações da navbar
 const abaPrime = () => {
-    section['tasks'].hidden = false;
-    section['completed'].hidden = true;
+    section['tasks'].hidden   = false;
+    section['done'].hidden    = true;
     section['deleted'].hidden = true;
     document.getElementById('clearAll').hidden = true;
 };
 
-const abaCompleted = () => {
-    section['tasks'].hidden = true;
-    section['completed'].hidden = false;
+const abaDone = () => {
+    section['tasks'].hidden   = true;
+    section['done'].hidden    = false;
     section['deleted'].hidden = true;
     document.getElementById('clearAll').hidden = false;
 };
 
 const abaExcluded = () => {
-    section['tasks'].hidden = true;
-    section['completed'].hidden = true;
+    section['tasks'].hidden   = true;
+    section['done'].hidden    = true;
     section['deleted'].hidden = false;
     document.getElementById('clearAll').hidden = false;
 };
 
 const optionsNavbar = {
-    prime:     () => abaPrime(),
-    completed: () => abaCompleted(),
-    excluded:  () => abaExcluded()
+    prime   : () => abaPrime(),
+    done    : () => abaDone(),
+    excluded: () => abaExcluded()
 };
 
 // abas navbar
@@ -35,9 +35,9 @@ title.addEventListener('click', abaPrime);
 
 const navbar = window.document.getElementById('navbarNav');
 navbar.addEventListener('click', event => {
-    const evento = event.target.id
-    if (evento != 'navbarNav') {
-        optionsNavbar[evento]();
+    const id = event.target.id
+    if (id != 'navbarNav') {
+        optionsNavbar[id]();
     }
 });
 

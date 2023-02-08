@@ -27,8 +27,8 @@ const statusUndefined = trueOrNull => {
 const clearAll = () => {
     let confirm = window.confirm('Deseja apagar todos os itens desta aba?');
     if (confirm) {
-        if (!section['completed'].hidden) {
-            section['completed'].innerHTML = '';
+        if (!section['done'].hidden) {
+            section['done'].innerHTML = '';
             statusUndefined(true);
         } else {
             section['deleted'].innerHTML = '';
